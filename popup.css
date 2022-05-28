@@ -1,0 +1,75 @@
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 1em;
+}
+
+.onoffswitch {
+    position: relative; width: 42px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    display: inline-block;
+}
+.onoffswitch-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 19px; padding: 0; line-height: 19px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "";
+    padding-left: 10px;
+    background-color: #2B8A13; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 11px; margin: 4px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 19px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+.latex-item {
+    background-color: rgb(175, 230, 175);
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.symbol {
+    font-family: 'Noto Sans Math', sans-serif;
+}
+
+.shortcut {
+    font-family: 'Fira Code', monospace;
+}
+
+.grid {
+    background-color: rgb(230, 230, 230);
+    display: grid;
+    grid-template-columns: 140px 140px 140px
+}

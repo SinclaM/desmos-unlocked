@@ -1,0 +1,26 @@
+{
+   "background": {
+      "persistent": false,
+      "scripts": [ "background.js" ]
+   },
+   "content_scripts": [ {
+      "js": [ "contentscript.js" ],
+      "matches": [ "https://www.desmos.com/calculator/*" ],
+      "run_at": "document_idle"
+   } ],
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwifN/k1fYEGc1zg1lsQh0gVSgCyIuDG36bKHYh+J5h6HlO0DkD96ZA8kc1+Asw0ht2TYZFUibhb5UpfVxoP8+9rEMjbLWMXWpkasTDVEEmEOPwuas3+ckTh5Frv9/o6uO+9n9wcyaKsEp1S9h2JQBPwRNwKyJpnoNDjJdUVmZeuVwxqJxes+SFq9y/I66JGuAOkoGvdZcQpwiq3u3AItbb5qy2Jjr+PawJl9o9wmRABpXH/BWicqIIgoSgt6rveHfBo6ciXZVbAc120BzOwT8Sas0OjUwduaqgxB1/E76OF5ZaqTwgq4YAC42AHGoPMOOHc6TTdVAiJIXeiOYdmTYQIDAQAB",
+   "manifest_version": 2,
+   "name": "Desmos More Greek Letters",
+   "page_action": {
+      "default_icon": {
+         "128": "images/icon128.png",
+         "16": "images/icon16.png",
+         "32": "images/icon32.png",
+         "48": "images/icon48.png"
+      },
+      "default_popup": "popup.html"
+   },
+   "permissions": [ "activeTab", "declarativeContent", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1"
+}
