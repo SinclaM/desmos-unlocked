@@ -7,7 +7,7 @@ body {
     position: relative; width: 42px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
     display: inline-block;
-    margin-left: auto;
+    padding-left: 5px;
 }
 .onoffswitch-checkbox {
     position: absolute;
@@ -58,13 +58,12 @@ body {
     width: 175px;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
 }
 
 .symbol {
     font-family: 'Noto Sans Math', sans-serif;
-    padding-right: 10px;
     padding-left: 5px;
+    padding-right: 5px;
 }
 
 .shortcut {
@@ -75,4 +74,10 @@ body {
     background-color: rgb(230, 230, 230);
     display: grid;
     grid-template-columns: 190px 190px;
+    row-gap: 10px;
+    justify-content: center;
+}
+
+#logo {
+    height: 100px;
 }

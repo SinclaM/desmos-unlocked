@@ -11,10 +11,9 @@
         <link rel="stylesheet" type="text/css" href="popup.css" />
     </head>
     <body>
+        <img id="logo" src="images/better-desmos.png" alt="">
         <template id="grid-item-template">
             <div id="#shortcut#" class="latex-item">
-                <div class="symbol">#symbol#</div>
-                <div class="shortcut">#shortcut#</div>
                 <div class="onoffswitch">
                     <input
                         type="checkbox"
@@ -29,6 +28,8 @@
                         <span class="onoffswitch-switch"></span>
                     </label>
                 </div>
+                <div class="symbol">#symbol#</div>
+                <div class="shortcut">#shortcut#</div>
             </div>
         </template>
         <textarea rows="4" cols="50"></textarea>

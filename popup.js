@@ -109,3 +109,33 @@ let basic = {
 };
 
 populateGrid("grid-item-template", "basic", basic);
+
+function storePreference(key) {
+  new Promise((resolve, reject) =>
+    chrome.storage.sync.get(key, result =>
+      chrome.runtime.lastError
+        ? reject(Error(chrome.runtime.lastError.message))
+        : resolve(result)
+    )
+  )
+}
+
+async function storePreference(shortcut, enabled) {
+    console.log('hi');
+    const { commands } = await getStorageData('autoCommands');
+    if (enabled) {
+        chrome.storage.sync.set({autoCommands: commands + " " + shortcut}, function(){});
+    }
+    else{
+        let newCommands = commands.split(" ").filter(word => word!=shortcut).join(" ");
+        chrome.storage.sync.set({autoCommands: newCommands}, function(){})
+    }
+}
+
+
+
+document.querySelectorAll('latex-item').forEach((item) => item.onclick = storePreference(
+        item.querySelector('.shortcut').innerHTML, item.querySelector('.onoffswitch-checkbox').checked
+    )
+)
+
