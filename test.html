@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script langauge="JavaScript" type="text/javascript">
+            function doMenu(item) {
+                obj = document.getElementById(item);
+                col = document.getElementById("x" + item);
+                if (obj.style.display == "none") {
+                    obj.style.display = "block";
+                    col.innerHTML = "[-]";
+                } else {
+                    obj.style.display = "none";
+                    col.innerHTML = "[+]";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <a href="JavaScript:doMenu('main');" id="xmain">[+]</a> Main Item
+        <div id="main" style="margin-left: 1em">
+            <a href="#">Item 1</a><br />
+            <a href="#">Item 2</a><br />
+            <a href="#">Item 3</a>
+        </div>
+        <br />
+    </body>
+</html>

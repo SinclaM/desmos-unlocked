@@ -34,6 +34,7 @@ setToDesmosDefault.onclick = function (element) {
         "alpha beta sqrt theta phi pi tau nthroot cbrt sum prod int ans percent infinity infty";
 };
 
+// Log changes to storage
 chrome.storage.onChanged.addListener(function (changes, namespace) {
     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
         console.log(
@@ -48,20 +49,57 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 // Using templates allows the html for the popup to be much more concise,
 // but then javascript must dynamically insert these into the DOM.
 // Not sure what best practices are.
-function createGridItem(templateID, symbol, shortcut) {
+function createGridItem(templateID, symbol, shortcut, commands) {
     let html = document.getElementById(templateID).innerHTML;
     html = html.replace(/#symbol#/g, symbol);
     html = html.replace(/#shortcut#/g, shortcut);
     const node = new DOMParser().parseFromString(html, "text/html").body
         .firstElementChild;
+    node.querySelector(".onoffswitch-checkbox").checked =
+        commands.includes(shortcut);
     return node;
 }
 
 // Populate the grid with fancy sliders for all the symbols -> shortcuts in dict.
-function populateGrid(templateID, gridID, dict) {
+async function populateGrid(templateID, gridID, dict) {
+    let commands = await getStorageData("autoCommands");
+    commands = commands.autoCommands.split(" ");
     let grid = document.getElementById(gridID);
     for (const symbol in dict) {
-        grid.append(createGridItem(templateID, symbol, dict[symbol]));
+        grid.append(createGridItem(templateID, symbol, dict[symbol], commands));
+    }
+}
+
+const getStorageData = (key) =>
+    new Promise((resolve, reject) =>
+        chrome.storage.sync.get(key, (result) =>
+            chrome.runtime.lastError
+                ? reject(Error(chrome.runtime.lastError.message))
+                : resolve(result)
+        )
+    );
+
+async function storePreference() {
+    let shortcut = this.parentElement.parentElement.id;
+    let commands = await getStorageData("autoCommands");
+    commands = commands.autoCommands;
+    console.log(`shortcut is: ${shortcut}`);
+    console.log(`autoCommands is: ${commands}`);
+    console.log(`Attempting to update preferences.`);
+    if (this.checked) {
+        if (commands !== "") {
+            shortcut = " " + shortcut;
+        }
+        chrome.storage.sync.set(
+            { autoCommands: commands + shortcut },
+            function () {}
+        );
+    } else {
+        let newCommands = commands
+            .split(" ")
+            .filter((word) => word != shortcut)
+            .join(" ");
+        chrome.storage.sync.set({ autoCommands: newCommands }, function () {});
     }
 }
 
@@ -108,45 +146,15 @@ let basic = {
     Ω: "Omega",
 };
 
-populateGrid("grid-item-template", "basic", basic);
+async function initialize() {
+    await populateGrid("grid-item-template", "basic", basic);
 
-const getStorageData = (key) =>
-    new Promise((resolve, reject) =>
-        chrome.storage.sync.get(key, (result) =>
-            chrome.runtime.lastError
-                ? reject(Error(chrome.runtime.lastError.message))
-                : resolve(result)
-        )
-    );
-
-async function storePreference() {
-    let shortcut = this.parentElement.parentElement.id;
-    let commands = await getStorageData("autoCommands");
-    commands = commands.autoCommands;
-    console.log(`shortcut is: ${shortcut}`);
-    console.log(`autoCommands is: ${commands}`);
-    console.log(`Attempting to update preferences.`);
-    if (this.checked) {
-        if (commands !== "") {
-            shortcut = " " + shortcut;
-        }
-        chrome.storage.sync.set(
-            { autoCommands: commands + shortcut},
-            function () {}
+    document.querySelectorAll(".latex-item").forEach(function (item) {
+        item.querySelector(".onoffswitch-checkbox").addEventListener(
+            "click",
+            storePreference
         );
-    } else {
-        let newCommands = commands
-            .split(" ")
-            .filter((word) => word != shortcut)
-            .join(" ");
-        chrome.storage.sync.set({ autoCommands: newCommands }, function () {});
-    }
+    });
 }
 
-function handleCheckboxClick(checkbox) {
-    checkbox.addEventListener("click", storePreference);
-}
-
-document.querySelectorAll(".latex-item").forEach(function (item) {
-    handleCheckboxClick(item.querySelector(".onoffswitch-checkbox"));
-});
+initialize();
