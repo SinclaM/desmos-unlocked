@@ -110,32 +110,43 @@ let basic = {
 
 populateGrid("grid-item-template", "basic", basic);
 
-function storePreference(key) {
-  new Promise((resolve, reject) =>
-    chrome.storage.sync.get(key, result =>
-      chrome.runtime.lastError
-        ? reject(Error(chrome.runtime.lastError.message))
-        : resolve(result)
-    )
-  )
+const getStorageData = (key) =>
+    new Promise((resolve, reject) =>
+        chrome.storage.sync.get(key, (result) =>
+            chrome.runtime.lastError
+                ? reject(Error(chrome.runtime.lastError.message))
+                : resolve(result)
+        )
+    );
+
+async function storePreference() {
+    let shortcut = this.parentElement.parentElement.id;
+    let commands = await getStorageData("autoCommands");
+    commands = commands.autoCommands;
+    console.log(`shortcut is: ${shortcut}`);
+    console.log(`autoCommands is: ${commands}`);
+    console.log(`Attempting to update preferences.`);
+    if (this.checked) {
+        if (commands !== "") {
+            shortcut = " " + shortcut;
+        }
+        chrome.storage.sync.set(
+            { autoCommands: commands + shortcut},
+            function () {}
+        );
+    } else {
+        let newCommands = commands
+            .split(" ")
+            .filter((word) => word != shortcut)
+            .join(" ");
+        chrome.storage.sync.set({ autoCommands: newCommands }, function () {});
+    }
 }
 
-async function storePreference(shortcut, enabled) {
-    console.log('hi');
-    const { commands } = await getStorageData('autoCommands');
-    if (enabled) {
-        chrome.storage.sync.set({autoCommands: commands + " " + shortcut}, function(){});
-    }
-    else{
-        let newCommands = commands.split(" ").filter(word => word!=shortcut).join(" ");
-        chrome.storage.sync.set({autoCommands: newCommands}, function(){})
-    }
+function handleCheckboxClick(checkbox) {
+    checkbox.addEventListener("click", storePreference);
 }
 
-
-
-document.querySelectorAll('latex-item').forEach((item) => item.onclick = storePreference(
-        item.querySelector('.shortcut').innerHTML, item.querySelector('.onoffswitch-checkbox').checked
-    )
-)
-
+document.querySelectorAll(".latex-item").forEach(function (item) {
+    handleCheckboxClick(item.querySelector(".onoffswitch-checkbox"));
+});
