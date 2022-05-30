@@ -1,8 +1,9 @@
 # Notes for (the Desmos fork of) MathQuill configuration options:
 
 
-The global configuration is set through Desmos.MathQuill.config(__yourConfigHere__). 
-__yourConfigHere__ may look like:
+The global configuration is set through Desmos.MathQuill.config(yourConfigHere). 
+yourConfigHere may look like:
+
     spaceBehavesLikeTab: true,
     leftRightIntoCmdGoes: 'up',
     restrictMismatchedBrackets: true,
@@ -22,10 +23,12 @@ __yourConfigHere__ may look like:
     moveOutOf: function(dir, mathField) { if (dir === MQ.L) ... else ... }
     }
     }
+
 as described at https://docs.mathquill.com/en/latest/Config/
 
 But Desmos also provides some extra configuration options. Here are the ones that are exposed 
 in their public API:
+
     ignoreNextMousedown: (_el: MouseEvent) => boolean;
     substituteTextarea: () => HTMLElement;
     /** Only used in interface versions 1 and 2. */
