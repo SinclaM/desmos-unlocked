@@ -2,7 +2,7 @@
 // https://stackoverflow.com/questions/9515704/insert-code-into-the-page-context-using-a-content-script/9517879#9517879
 
 function updateAutoCommands() {
-	chrome.storage.sync.get('autoCommands', function(data) {
+	chrome.storage.local.get('autoCommands', function(data) {
 		var actualCode = `Desmos.MathQuill.config({
 			autoCommands: "${data.autoCommands}"
 		});

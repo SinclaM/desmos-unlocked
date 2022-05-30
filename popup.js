@@ -4,15 +4,15 @@ let setToDesmosDefault = document.getElementById("setToDesmosDefault");
 let textbox = document.querySelector("textarea");
 console.log(textbox);
 
-chrome.storage.sync.get("autoCommands", function (data) {
+chrome.storage.local.get("autoCommands", function (data) {
     textbox.value = data.autoCommands;
 });
 
 setToText.onclick = function (element) {
-    chrome.storage.sync.set({ autoCommands: textbox.value }, function () {});
+    chrome.storage.local.set({ autoCommands: textbox.value }, function () {});
 };
 setToDefault.onclick = function (element) {
-    chrome.storage.sync.set(
+    chrome.storage.local.set(
         {
             autoCommands:
                 "alpha beta sqrt theta Theta phi Phi pi Pi tau nthroot cbrt sum prod int ans percent infinity infty gamma Gamma delta Delta epsilon epsiv zeta eta kappa lambda Lambda mu xi Xi rho sigma Sigma chi Psi omega Omega",
@@ -23,7 +23,7 @@ setToDefault.onclick = function (element) {
         "alpha beta sqrt theta Theta phi Phi pi Pi tau nthroot cbrt sum prod int ans percent infinity infty gamma Gamma delta Delta epsilon epsiv zeta eta kappa lambda Lambda mu xi Xi rho sigma Sigma chi Psi omega Omega";
 };
 setToDesmosDefault.onclick = function (element) {
-    chrome.storage.sync.set(
+    chrome.storage.local.set(
         {
             autoCommands:
                 "alpha beta sqrt theta phi pi tau nthroot cbrt sum prod int ans percent infinity infty",
@@ -74,7 +74,7 @@ async function populateGrid(templateID, gridID, dict) {
 // e.g. getStorageData('autoCommands') -> 'alpha beta gamma'
 const getStorageData = (key) =>
     new Promise((resolve, reject) =>
-        chrome.storage.sync.get(key, (result) =>
+        chrome.storage.local.get(key, (result) =>
             chrome.runtime.lastError
                 ? reject(Error(chrome.runtime.lastError.message))
                 : resolve(result)
@@ -92,7 +92,7 @@ async function storeConfig() {
         if (currentlyStored !== "") {
             wordToStore = " " + wordToStore;
         }
-        chrome.storage.sync.set(
+        chrome.storage.local.set(
             { autoCommands: currentlyStored + wordToStore },
             function () {}
         );
@@ -101,7 +101,7 @@ async function storeConfig() {
             .split(" ")
             .filter((word) => word != wordToStore)
             .join(" ");
-        chrome.storage.sync.set({ autoCommands: newStorage }, function () {});
+        chrome.storage.local.set({ autoCommands: newStorage }, function () {});
     }
 }
 
