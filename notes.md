@@ -95,6 +95,7 @@ configuration when creating new `MathField`s, possibly in order to interface nic
 virtual keyboard.
 
 Anyway, this is the list of defualt `autoOperatorNames`:
+
     IndependentTTest: "IndependentTTest"
     TScore: "t score"
     TTest: "t test"
