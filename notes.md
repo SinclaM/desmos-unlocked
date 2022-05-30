@@ -3,7 +3,7 @@
 
 The global configuration is set through Desmos.MathQuill.config(__yourConfigHere__). 
 __yourConfigHere__ may look like:
-    ```
+    ```js
     spaceBehavesLikeTab: true,
     leftRightIntoCmdGoes: 'up',
     restrictMismatchedBrackets: true,
@@ -28,7 +28,7 @@ as described at https://docs.mathquill.com/en/latest/Config/
 
 But Desmos also provides some extra configuration options. Here are the ones that are exposed 
 in their public API:
-    ```
+    ```js
     ignoreNextMousedown: (_el: MouseEvent) => boolean;
     substituteTextarea: () => HTMLElement;
     /** Only used in interface versions 1 and 2. */
@@ -96,7 +96,7 @@ configuration when creating new `MathField`s, possibly in order to interface nic
 virtual keyboard.
 
 Anyway, this is the list of defualt `autoOperatorNames`:
-    ```
+    ```js
     IndependentTTest: "IndependentTTest"
     TScore: "t score"
     TTest: "t test"
