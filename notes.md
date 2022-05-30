@@ -3,7 +3,6 @@
 
 The global configuration is set through Desmos.MathQuill.config(__yourConfigHere__). 
 __yourConfigHere__ may look like:
-    ```js
     spaceBehavesLikeTab: true,
     leftRightIntoCmdGoes: 'up',
     restrictMismatchedBrackets: true,
@@ -23,12 +22,10 @@ __yourConfigHere__ may look like:
     moveOutOf: function(dir, mathField) { if (dir === MQ.L) ... else ... }
     }
     }
-    ```
 as described at https://docs.mathquill.com/en/latest/Config/
 
 But Desmos also provides some extra configuration options. Here are the ones that are exposed 
 in their public API:
-    ```js
     ignoreNextMousedown: (_el: MouseEvent) => boolean;
     substituteTextarea: () => HTMLElement;
     /** Only used in interface versions 1 and 2. */
@@ -76,7 +73,6 @@ in their public API:
     pray('JQuery is set for interface v < 3', this.jQuery);
     return this.jQuery;
     }
-    ```
 as taken from `src/publicapi.ts`. I've judged the options marked with USEFUL to be something 
 that the extension should allow users to customize.
 
@@ -96,7 +92,6 @@ configuration when creating new `MathField`s, possibly in order to interface nic
 virtual keyboard.
 
 Anyway, this is the list of defualt `autoOperatorNames`:
-    ```js
     IndependentTTest: "IndependentTTest"
     TScore: "t score"
     TTest: "t test"
@@ -207,4 +202,3 @@ Anyway, this is the list of defualt `autoOperatorNames`:
     variance: "variance"
     varp: "variance population"
     width: "width"
-    ```
