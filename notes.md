@@ -59,6 +59,8 @@ in their public API:
                                                                     (but I can't figure out how to use it)
       autoCommands: AutoDict;    <------------------------------------------------ USEFUL
       autoParenthesizedFunctions: AutoDict;  <------------------------------------ USEFUL
+                                                                    (only works if specified functions are
+                                                                            also autoOperatorNames)
       quietEmptyDelimiters: { [id: string]: any };
       disableAutoSubstitutionInSubscripts?: boolean;
       interpretTildeAsSim: boolean;

@@ -34,7 +34,7 @@ setToDesmosDefault.onclick = function (element) {
         "alpha beta sqrt theta phi pi tau nthroot cbrt sum prod int ans percent infinity infty";
 };
 
-// Log changes to storage
+// Log changes to storage for testing
 chrome.storage.onChanged.addListener(function (changes, namespace) {
     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
         console.log(
@@ -70,6 +70,8 @@ async function populateGrid(templateID, gridID, dict) {
     }
 }
 
+// Function to retreive the user config data corresponding to the given key
+// e.g. getStorageData('autoCommands') -> 'alpha beta gamma'
 const getStorageData = (key) =>
     new Promise((resolve, reject) =>
         chrome.storage.sync.get(key, (result) =>
@@ -79,27 +81,27 @@ const getStorageData = (key) =>
         )
     );
 
-async function storePreference() {
-    let shortcut = this.parentElement.parentElement.id;
-    let commands = await getStorageData("autoCommands");
-    commands = commands.autoCommands;
-    console.log(`shortcut is: ${shortcut}`);
-    console.log(`autoCommands is: ${commands}`);
-    console.log(`Attempting to update preferences.`);
+// Function to add/remove user config data corresponding to a slider that was
+// just clicked.
+async function storeConfig() {
+    let wordToStore = this.parentElement.parentElement.id;
+    let opt = this.parentElement.parentElement.getAttribute('opt');
+    let currentlyStored = await getStorageData(opt);
+    currentlyStored = currentlyStored.autoCommands;
     if (this.checked) {
-        if (commands !== "") {
-            shortcut = " " + shortcut;
+        if (currentlyStored !== "") {
+            wordToStore = " " + wordToStore;
         }
         chrome.storage.sync.set(
-            { autoCommands: commands + shortcut },
+            { autoCommands: currentlyStored + wordToStore },
             function () {}
         );
     } else {
-        let newCommands = commands
+        let newStorage = currentlyStored
             .split(" ")
-            .filter((word) => word != shortcut)
+            .filter((word) => word != wordToStore)
             .join(" ");
-        chrome.storage.sync.set({ autoCommands: newCommands }, function () {});
+        chrome.storage.sync.set({ autoCommands: newStorage }, function () {});
     }
 }
 
@@ -146,15 +148,19 @@ let basic = {
     Ω: "Omega",
 };
 
+// Add all the dynamically loaded nodes to the DOM using templates and give
+// sliders their funcionality
 async function initialize() {
     await populateGrid("grid-item-template", "basic", basic);
 
+    // Make the sliders actually update user configs when clicked
     document.querySelectorAll(".latex-item").forEach(function (item) {
         item.querySelector(".onoffswitch-checkbox").addEventListener(
             "click",
-            storePreference
+            storeConfig
         );
     });
 }
 
+// Make Desmos beautiful!
 initialize();
