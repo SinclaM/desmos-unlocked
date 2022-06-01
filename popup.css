@@ -55,7 +55,7 @@ body {
 
 .latex-item {
     background-color: rgb(175, 230, 175);
-    width: 175px;
+    width: 200px;
     display: flex;
     align-items: center;
 }
@@ -73,7 +73,7 @@ body {
 .grid {
     background-color: rgb(230, 230, 230);
     display: grid;
-    grid-template-columns: 190px 190px;
+    grid-template-columns: 210px 210px;
     row-gap: 10px;
     justify-content: center;
 }

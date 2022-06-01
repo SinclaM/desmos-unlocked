@@ -65,8 +65,10 @@ async function populateGrid(templateID, gridID, dict) {
     let commands = await getStorageData("autoCommands");
     commands = commands.autoCommands.split(" ");
     let grid = document.getElementById(gridID);
-    for (const symbol in dict) {
-        grid.append(createGridItem(templateID, symbol, dict[symbol], commands));
+    for (const shortcut in dict) {
+        grid.append(
+            createGridItem(templateID, dict[shortcut], shortcut, commands)
+        );
     }
 }
 
@@ -85,7 +87,7 @@ const getStorageData = (key) =>
 // just clicked.
 async function storeConfig() {
     let wordToStore = this.parentElement.parentElement.id;
-    let opt = this.parentElement.parentElement.getAttribute('opt');
+    let opt = this.parentElement.parentElement.getAttribute("opt");
     let currentlyStored = await getStorageData(opt);
     currentlyStored = currentlyStored.autoCommands;
     if (this.checked) {
@@ -105,53 +107,70 @@ async function storeConfig() {
     }
 }
 
-// basic symbols and their shortucts
-let basic = {
-    α: "alpha",
-    β: "beta",
-    γ: "gamma",
-    ϝ: "digamma",
-    Γ: "Gamma",
-    δ: "delta",
-    Δ: "Delta",
-    ϵ: "epsilon",
-    ε: "varepsilon",
-    ζ: "zeta",
-    η: "eta",
-    θ: "theta",
-    ι: "iota",
-    κ: "kappa",
-    ϰ: "varkappa",
-    λ: "lambda",
-    Λ: "Lambda",
-    μ: "mu",
-    ν: "nu",
-    ξ: "xi",
-    π: "pi",
-    ϖ: "varpi",
-    Π: "Pi",
-    ρ: "rho",
-    ϱ: "varrho",
-    σ: "sigma",
-    ς: "varsigma",
-    Σ: "Sigma",
-    τ: "tau",
-    υ: "upsilon",
-    Υ: "Upsilon",
-    ϕ: "phi",
-    φ: "varphi",
-    Φ: "Phi",
-    χ: "chi",
-    ψ: "psi",
-    Ψ: "Psi",
-    ω: "omega",
-    Ω: "Omega",
+let desmosDefualtAutoCommands = {
+    sqrt: "√",
+    cbrt: "∛",
+    nthroot: "∜",
+    nthroot: "∜",
+    sum: "Σ",
+    prod: "∏",
+    int: "∫",
+    percent: "%",
+    infinity: "∞",
+    infty: "∞",
+    alpha: "α",
+    beta: "β",
+    theta: "θ",
+    pi: "π",
+    tau: "τ",
+    phi: "ϕ",
+};
+
+// basic shortucts and their symbols
+let basicAutoCommands = {
+    gamma: "γ",
+    digamma: "ϝ",
+    Gamma: "Γ",
+    delta: "δ",
+    Delta: "Δ",
+    epsilon: "ϵ",
+    varepsilon: "ε",
+    zeta: "ζ",
+    eta: "η",
+    iota: "ι",
+    kappa: "κ",
+    varkappa: "ϰ",
+    lambda: "λ",
+    Lambda: "Λ",
+    mu: "μ",
+    nu: "ν",
+    xi: "ξ",
+    varpi: "ϖ",
+    Pi: "Π",
+    rho: "ρ",
+    varrho: "ϱ",
+    sigma: "σ",
+    varsigma: "ς",
+    Sigma: "Σ",
+    upsilon: "υ",
+    Upsilon: "Υ",
+    varphi: "φ",
+    Phi: "Φ",
+    chi: "χ",
+    psi: "ψ",
+    Psi: "Ψ",
+    omega: "ω",
+    Omega: "Ω",
 };
 
 // Add all the dynamically loaded nodes to the DOM using templates and give
 // sliders their funcionality
 async function initialize() {
-    await populateGrid("grid-item-template", "basic", basic);
+    await populateGrid(
+        "grid-item-template",
+        "basic",
+        desmosDefualtAutoCommands
+    );
 
     // Make the sliders actually update user configs when clicked
     document.querySelectorAll(".latex-item").forEach(function (item) {
