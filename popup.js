@@ -12,26 +12,33 @@ setToText.onclick = function (element) {
     chrome.storage.local.set({ autoCommands: textbox.value }, function () {});
 };
 setToDefault.onclick = function (element) {
-    chrome.storage.local.set(
-        {
-            autoCommands:
-                "alpha beta sqrt theta Theta phi Phi pi Pi tau nthroot cbrt sum prod int ans percent infinity infty gamma Gamma delta Delta epsilon epsiv zeta eta kappa lambda Lambda mu xi Xi rho sigma Sigma chi Psi omega Omega",
-        },
-        function () {}
+    massSet(
+        Array.from(
+            document.querySelectorAll(
+                "#desmos-default .latex-item, #basic .latex-item"
+            )
+        )
+            .map((item) => item.id)
+            .filter(function (item) {
+                return (
+                    item !== "ge" &&
+                    item !== "le" &&
+                    item !== "ne" &&
+                    item !== "pm" &&
+                    item !== "mp"
+                );
+            }),
+        "autoCommands"
     );
-    textbox.value =
-        "alpha beta sqrt theta Theta phi Phi pi Pi tau nthroot cbrt sum prod int ans percent infinity infty gamma Gamma delta Delta epsilon epsiv zeta eta kappa lambda Lambda mu xi Xi rho sigma Sigma chi Psi omega Omega";
 };
+
 setToDesmosDefault.onclick = function (element) {
-    chrome.storage.local.set(
-        {
-            autoCommands:
-                "alpha beta sqrt theta phi pi tau nthroot cbrt sum prod int ans percent infinity infty",
-        },
-        function () {}
+    massSet(
+        Array.from(
+            document.querySelectorAll("#desmos-default .latex-item")
+        ).map((item) => item.id),
+        "autoCommands"
     );
-    textbox.value =
-        "alpha beta sqrt theta phi pi tau nthroot cbrt sum prod int ans percent infinity infty";
 };
 
 // Log changes to storage for testing
@@ -43,6 +50,20 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
         );
     }
 });
+
+// Set many sliders at once. Used when the user presses a reset-to-default button.
+// Looping over all the sliders and clicking them won't work due to data races.
+// toSet is an array of all the autoCommands to be set.
+function massSet(toSet, opt) {
+    document.querySelectorAll(".grid .latex-item").forEach(function (item) {
+        item.querySelector(".onoffswitch-checkbox").checked = toSet.includes(
+            item.id
+        );
+    });
+
+    // [opt] because otherwise it will assign the literal string "opt" as the field name.
+    chrome.storage.local.set({ [opt]: toSet.join(" ") });
+}
 
 // Create the DOM node for the items that will be placed in the grid.
 // e.g. 'α alpha [slider]'
@@ -107,70 +128,89 @@ async function storeConfig() {
     }
 }
 
-let desmosDefualtAutoCommands = {
-    sqrt: "√",
-    cbrt: "∛",
-    nthroot: "∜",
-    nthroot: "∜",
-    sum: "Σ",
-    prod: "∏",
-    int: "∫",
-    percent: "%",
-    infinity: "∞",
-    infty: "∞",
-    alpha: "α",
-    beta: "β",
-    theta: "θ",
-    pi: "π",
-    tau: "τ",
-    phi: "ϕ",
-};
-
-// basic shortucts and their symbols
-let basicAutoCommands = {
-    gamma: "γ",
-    digamma: "ϝ",
-    Gamma: "Γ",
-    delta: "δ",
-    Delta: "Δ",
-    epsilon: "ϵ",
-    varepsilon: "ε",
-    zeta: "ζ",
-    eta: "η",
-    iota: "ι",
-    kappa: "κ",
-    varkappa: "ϰ",
-    lambda: "λ",
-    Lambda: "Λ",
-    mu: "μ",
-    nu: "ν",
-    xi: "ξ",
-    varpi: "ϖ",
-    Pi: "Π",
-    rho: "ρ",
-    varrho: "ϱ",
-    sigma: "σ",
-    varsigma: "ς",
-    Sigma: "Σ",
-    upsilon: "υ",
-    Upsilon: "Υ",
-    varphi: "φ",
-    Phi: "Φ",
-    chi: "χ",
-    psi: "ψ",
-    Psi: "Ψ",
-    omega: "ω",
-    Omega: "Ω",
-};
-
 // Add all the dynamically loaded nodes to the DOM using templates and give
 // sliders their funcionality
 async function initialize() {
+    // Desmos default symbols and their shortcuts
+    let desmosDefualtAutoCommands = {
+        sqrt: "√",
+        cbrt: "∛",
+        nthroot: "∜",
+        nthroot: "∜",
+        sum: "Σ",
+        prod: "∏",
+        int: "∫",
+        percent: "%",
+        infinity: "∞",
+        infty: "∞",
+        alpha: "α",
+        beta: "β",
+        theta: "θ",
+        pi: "π",
+        tau: "τ",
+        phi: "ϕ",
+    };
+
+    // basic shortucts and their symbols
+    let basicAutoCommands = {
+        gamma: "γ",
+        digamma: "ϝ",
+        Gamma: "Γ",
+        delta: "δ",
+        Delta: "Δ",
+        epsilon: "ϵ",
+        //varepsilon: "ε",
+        zeta: "ζ",
+        eta: "η",
+        iota: "ι",
+        kappa: "κ",
+        //varkappa: "ϰ",
+        lambda: "λ",
+        Lambda: "Λ",
+        mu: "μ",
+        nu: "ν",
+        xi: "ξ",
+        //varpi: "ϖ",
+        Pi: "Π",
+        rho: "ρ",
+        //varrho: "ϱ",
+        sigma: "σ",
+        //varsigma: "ς",
+        Sigma: "Σ",
+        upsilon: "υ",
+        Upsilon: "Υ",
+        //varphi: "φ",
+        Phi: "Φ",
+        chi: "χ",
+        psi: "ψ",
+        Psi: "Ψ",
+        omega: "ω",
+        Omega: "Ω",
+        square: "□",
+        mid: "|",
+        parallel: "∥",
+        nparallel: "∦",
+        perp: "⊥",
+        pm: "±",
+        mp: "∓",
+        to: "→",
+        le: "≤",
+        ge: "≥",
+        ne: "≠",
+        times: "×",
+        div: "÷",
+        approx: "≈",
+    };
+
+    let advancedAutoCommands = {};
+
     await populateGrid(
         "grid-item-template",
-        "basic",
+        "desmos-default",
         desmosDefualtAutoCommands
     );
+
+    await populateGrid("grid-item-template", "basic", basicAutoCommands);
 
     // Make the sliders actually update user configs when clicked
     document.querySelectorAll(".latex-item").forEach(function (item) {
