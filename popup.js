@@ -202,15 +202,39 @@ async function initialize() {
         approx: "≈",
     };
 
-    let advancedAutoCommands = {};
+    let advancedAutoCommands = {
+        dot: " ̇",
+        hat: "ˆ",
+        vec: " ⃗",
+        bar: "¯",
+        tidle: " ̃",
+        langle: "⟨",
+        rangle: "⟩",
+        lVert: "||",
+        rVert: "||",
+        binom: "()",
+        coprod: "",
+        frac: "",
+        underline: "⎯",
+        overline: "¯",
+        overrightarrow: "→",
+        overleftarrow: "←",
+        overleftrightarrow: "←→",
+        overarc: "⌒",
+        mathrm: "",
+        mathit: "",
+        mathbf: "",
+        mathsf: "",
+        MathQuillMathField: "",
+    };
 
     await populateGrid(
         "grid-item-template",
         "desmos-default",
         desmosDefualtAutoCommands
     );
-
     await populateGrid("grid-item-template", "basic", basicAutoCommands);
+    await populateGrid("grid-item-template", "advanced", advancedAutoCommands);
 
     // Make the sliders actually update user configs when clicked
     document.querySelectorAll(".latex-item").forEach(function (item) {

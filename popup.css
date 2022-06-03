@@ -1,7 +1,7 @@
 body {
     font-family: "Roboto", sans-serif;
     font-size: 1em;
-    width: 425px;
+    width: 535px;
     height: 600px;
 }
 
@@ -57,7 +57,7 @@ body {
 
 .latex-item {
     background-color: rgb(175, 230, 175);
-    width: 200px;
+    width: 250px;
     display: flex;
     align-items: center;
 }
@@ -70,16 +70,25 @@ body {
 
 .shortcut {
     font-family: 'Fira Code', monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .grid {
     background-color: rgb(230, 230, 230);
     display: grid;
-    grid-template-columns: 210px 210px;
+    grid-template-columns: 260px 260px;
     row-gap: 10px;
     justify-content: center;
 }
 
 #logo {
     height: 100px;
+    float: left;
 }
+
+#github-image{
+    height: 75px;
+    float: right;
+}
+
