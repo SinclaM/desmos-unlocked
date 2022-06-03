@@ -63,7 +63,7 @@ body {
 .symbol {
     font-family: 'Noto Sans Math', sans-serif;
     padding-left: 5px;
-    padding-right: 5px;
+    padding-right: 10px;
 }
 
 .shortcut {
