@@ -1,6 +1,8 @@
 body {
     font-family: "Roboto", sans-serif;
     font-size: 1em;
+    width: 425px;
+    height: 600px;
 }
 
 .onoffswitch {
