@@ -27,6 +27,7 @@ a {
     width: 17%;
     align-items: center;
     justify-content: space-between;
+    align-self: flex-start;
 }
 
 a img {
@@ -46,6 +47,27 @@ textarea {
 #setToText {
     display: none;
 }
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.15em;
+}
+
+.thin-line {
+    border: none;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.thick-line {
+    border: none;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 1);
+}
+
 
 .grid {
     display: grid;
