@@ -46,18 +46,18 @@ textarea {
 
 .latex-item {
     width: 250px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 60px 30px 160px;
     align-items: center;
     background-color: rgba(46,115,220, 0.3);
 }
 
 .symbol {
     font-family: 'Noto Sans Math', sans-serif;
-    padding-left: 5px;
-    padding-right: 10px;
 }
 
 .shortcut {
+    display: inline;
     font-family: 'Fira Code', monospace;
     overflow: hidden;
     text-overflow: ellipsis;

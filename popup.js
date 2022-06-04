@@ -52,7 +52,6 @@ browser.storage.onChanged.addListener(function (changes, namespace) {
 });
 
 // Set many sliders at once. Used when the user presses a reset-to-default button.
-// Looping over all the sliders and clicking them won't work due to data races.
 // toSet is an array of all the autoCommands to be set.
 function massSet(toSet, opt) {
     document.querySelectorAll(".grid .latex-item").forEach(function (item) {
@@ -212,7 +211,7 @@ async function initialize() {
         rangle: "⟩",
         lVert: "||",
         rVert: "||",
-        binom: "()",
+        binom: "( )",
         coprod: "",
         frac: "",
         underline: "⎯",
