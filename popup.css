@@ -1,9 +1,9 @@
 body {
     font-family: "Roboto", sans-serif;
     font-size: 0.9em;
-    width: 535px;
+    width: 360px;
     height: 600px;
-    margin: 0px 0px 0px 0px;
+    background-color: rgba(46,115,220, 0.05);
 }
 
 header {
@@ -17,8 +17,9 @@ header {
 }
 
 #site-title {
-    font-size: 2.5em;
+    font-size: 2em;
     width: 35%;
+    padding-right: 25px;
 }
 
 a {
@@ -28,28 +29,35 @@ a {
     justify-content: space-between;
 }
 
+a img {
+    padding-right: 5px;
+}
+
 #github-image{
     height: 40px;
 }
 
 textarea {
-    display: block;
+    /*display: block;*/
+    display: none;
+    width: 90%;
+}
+
+#setToText {
+    display: none;
 }
 
 .grid {
-    background-color: rgb(230, 230, 230);
     display: grid;
-    grid-template-columns: 260px 260px;
+    grid-template-columns: 175px 175px;
     row-gap: 10px;
     justify-content: center;
 }
 
 .latex-item {
-    width: 250px;
     display: grid;
-    grid-template-columns: 60px 30px 160px;
+    grid-template-columns: 60px 25px 75px;
     align-items: center;
-    background-color: rgba(46,115,220, 0.3);
 }
 
 .symbol {
@@ -59,8 +67,6 @@ textarea {
 .shortcut {
     display: inline;
     font-family: 'Fira Code', monospace;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .onoffswitch {

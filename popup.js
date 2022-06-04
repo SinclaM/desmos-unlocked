@@ -77,6 +77,13 @@ function createGridItem(templateID, symbol, shortcut, commands) {
         .firstElementChild;
     node.querySelector(".onoffswitch-checkbox").checked =
         commands.includes(shortcut);
+
+    // Stop overflow of long shortcuts by letting them span both columns.
+    // This feels like a bad way of styling this but oh well. 
+    if (shortcut.length > 9) {
+        node.style.gridColumn = "1 / span 2";
+    }
+
     return node;
 }
 
@@ -216,14 +223,14 @@ async function initialize() {
         frac: "",
         underline: "⎯",
         overline: "¯",
-        overrightarrow: "→",
-        overleftarrow: "←",
-        overleftrightarrow: "←→",
         overarc: "⌒",
         mathrm: "",
         mathit: "",
         mathbf: "",
         mathsf: "",
+        overrightarrow: "→",
+        overleftarrow: "←",
+        overleftrightarrow: "⟷",
         MathQuillMathField: "",
     };
 
