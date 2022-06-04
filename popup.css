@@ -118,7 +118,7 @@ h2 {
 .onoffswitch-inner:before {
     content: "";
     padding-left: 10px;
-    background-color: #2E73DC; color: #FFFFFF;
+    background-color: #0094FF; color: #FFFFFF;
 }
 .onoffswitch-inner:after {
     content: "";
