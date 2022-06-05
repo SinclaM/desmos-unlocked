@@ -32,14 +32,14 @@ setToDesmosDefault.onclick = function (element) {
 };
 
 // Log changes to storage for testing
-// browser.storage.onChanged.addListener(function (changes, namespace) {
-     //for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-         //console.log(
-             //`Storage key "${key}" in namespace "${namespace}" changed.`,
-             //`Old value was "${oldValue}", new value is "${newValue}".`
-         //);
-     //}
-// });
+ browser.storage.onChanged.addListener(function (changes, namespace) {
+     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+         console.log(
+             `Storage key "${key}" in namespace "${namespace}" changed.`,
+             `Old value was "${oldValue}", new value is "${newValue}".`
+         );
+     }
+ });
 
 // Set many sliders at once. Used when the user presses a reset-to-default button.
 // toSet is an array of all the autoCommands to be set.
@@ -91,14 +91,18 @@ async function populateGrid(templateID, gridID, dict) {
 
 // Function to retreive the user config data corresponding to the given key
 // e.g. getStorageData('autoCommands') -> 'alpha beta gamma'
-const getStorageData = (key) =>
-    new Promise((resolve, reject) =>
-        browser.storage.local.get(key, (result) =>
-            browser.runtime.lastError
-                ? reject(Error(browser.runtime.lastError.message))
-                : resolve(result)
-        )
-    );
+//const getStorageData = (key) =>
+    //new Promise((resolve, reject) =>
+        //browser.storage.local.get(key, (result) =>
+            //browser.runtime.lastError
+                //? reject(Error(browser.runtime.lastError.message))
+                //: resolve(result)
+        //)
+    //);
+
+async function getStorageData(key) {
+    return value = await browser.storage.local.get(key);
+}
 
 // Function to add/remove user config data corresponding to a slider that was
 // just clicked.
@@ -112,15 +116,14 @@ async function storeConfig() {
             wordToStore = " " + wordToStore;
         }
         browser.storage.local.set(
-            { autoCommands: currentlyStored + wordToStore },
-            function () {}
+            { autoCommands: currentlyStored + wordToStore }
         );
     } else {
         let newStorage = currentlyStored
             .split(" ")
             .filter((word) => word != wordToStore)
             .join(" ");
-        browser.storage.local.set({ autoCommands: newStorage }, function () {});
+        browser.storage.local.set({ autoCommands: newStorage });
     }
 }
 

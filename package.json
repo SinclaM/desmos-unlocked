@@ -1,0 +1,16 @@
+{
+  "name": "desmos-unlocked",
+  "version": "1.0.0",
+  "description": "Browser extension for better user control of the Desmos graphing calculator configuration ",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SinclaM/desmos-unlocked.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SinclaM/desmos-unlocked/issues"
+  },
+  "homepage": "https://github.com/SinclaM/desmos-unlocked#readme",
+  "devDependencies": {
+    "webextension-polyfill": "^0.9.0"
+  }
+}
