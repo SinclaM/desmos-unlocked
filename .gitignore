@@ -90,6 +90,9 @@ lerna-debug.log
 .DS_Store
 Thumbs.db
 
-# Ignore notes and test files
+# notes and test files
 notes.md
 test.html
+
+# Polyfills
+webextension-polyfill-0.9.0

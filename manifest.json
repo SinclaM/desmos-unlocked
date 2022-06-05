@@ -1,10 +1,10 @@
 {
    "background": {
       "persistent": true,
-      "scripts": [ "background.js" ]
+      "scripts": [ "browser-polyfill.js ,background.js" ]
    },
    "content_scripts": [ {
-      "js": [ "contentscript.js" ],
+      "js": [ "browser-polyfill.js, contentscript.js" ],
       "matches": [ "https://www.desmos.com/calculator*" ],
       "run_at": "document_idle"
    } ],
