@@ -3,7 +3,8 @@ body {
     font-size: 0.9em;
     width: 360px;
     height: 600px;
-    background-color: rgba(46,115,220, 0.05);
+    background-color: rgba(46,115,220,0.05);
+    overflow-x: hidden; /* fix horizontal scrollbar showing */
 }
 
 header {
@@ -12,7 +13,7 @@ header {
 }
 
 #logo {
-    height: 100px;
+    height: 90px;
     object-position: left top;
     padding-right: 15px;
     font-weight: bold;
