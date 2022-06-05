@@ -241,5 +241,4 @@ async function initialize() {
     });
 }
 
-// Make Desmos beautiful!
-initialize();
+document.addEventListener("DOMContentLoaded", initialize)

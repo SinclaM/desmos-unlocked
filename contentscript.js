@@ -1,17 +1,40 @@
-// thx stackOverflow
-// https://stackoverflow.com/questions/9515704/insert-code-into-the-page-context-using-a-content-script/9517879#9517879
+function initializeAutoCommands() {
+    browser.storage.local.get("autoCommands", function (data) {
+        let injectedCode = `function waitForDesmosLoaded() {
+                                let interval = 10; // ms
+                                window.setTimeout(function() {
+                                    if (window.Desmos.MathQuill.config) {
+                                        Desmos.MathQuill.config({
+                                            autoCommands: "${data.autoCommands}"
+                                        });
+                                    } else {
+                                        waitForDesmosLoaded();
+                                    }
+                                }, interval);
+                            }
+
+                            waitForDesmosLoaded();
+                            `;
+        let script = document.createElement("script");
+        script.textContent = injectedCode;
+        (document.head || document.documentElement).appendChild(script);
+        script.remove();
+    });
+}
+
 
 function updateAutoCommands() {
-	browser.storage.local.get('autoCommands', function(data) {
-		var actualCode = `Desmos.MathQuill.config({
-			autoCommands: "${data.autoCommands}"
-		});
-    console.log(Desmos.MathQuill.config);`;
-		var script = document.createElement('script');
-		script.textContent = actualCode;
-		(document.head||document.documentElement).appendChild(script);
-		script.remove();
-	});
+    browser.storage.local.get("autoCommands", function (data) {
+        let injectedCode = `Desmos.MathQuill.config({
+                                autoCommands: "${data.autoCommands}"
+                            });`;
+        let script = document.createElement("script");
+        script.textContent = injectedCode;
+        (document.head || document.documentElement).appendChild(script);
+        script.remove();
+    });
 }
-updateAutoCommands();
+
+
+initializeAutoCommands();
 browser.storage.onChanged.addListener(updateAutoCommands);
