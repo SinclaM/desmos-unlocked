@@ -1,16 +1,6 @@
-let setToText = document.getElementById("setToText");
-let setToDefault = document.getElementById("setToDefault");
-let setToDesmosDefault = document.getElementById("setToDesmosDefault");
-let textbox = document.querySelector("textarea");
-console.log(textbox);
+let setToDefault = document.getElementById("set-to-default");
+let setToDesmosDefault = document.getElementById("set-to-desmos-default");
 
-browser.storage.local.get("autoCommands", function (data) {
-    textbox.value = data.autoCommands;
-});
-
-setToText.onclick = function (element) {
-    browser.storage.local.set({ autoCommands: textbox.value }, function () {});
-};
 setToDefault.onclick = function (element) {
     massSet(
         Array.from(
@@ -42,14 +32,14 @@ setToDesmosDefault.onclick = function (element) {
 };
 
 // Log changes to storage for testing
-browser.storage.onChanged.addListener(function (changes, namespace) {
-    for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-        console.log(
-            `Storage key "${key}" in namespace "${namespace}" changed.`,
-            `Old value was "${oldValue}", new value is "${newValue}".`
-        );
-    }
-});
+// browser.storage.onChanged.addListener(function (changes, namespace) {
+     //for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+         //console.log(
+             //`Storage key "${key}" in namespace "${namespace}" changed.`,
+             //`Old value was "${oldValue}", new value is "${newValue}".`
+         //);
+     //}
+// });
 
 // Set many sliders at once. Used when the user presses a reset-to-default button.
 // toSet is an array of all the autoCommands to be set.

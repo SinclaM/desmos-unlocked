@@ -6,6 +6,5 @@ browser.runtime.onInstalled.addListener(function () {
         },
         function () {}
     );
-    console.log("background finished\n");
 });
 

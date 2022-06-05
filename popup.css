@@ -39,12 +39,6 @@ a img {
     height: 40px;
 }
 
-textarea {
-    /*display: block;*/
-    display: none;
-    width: 90%;
-}
-
 button {
     align-items: center;
     background-color: #FFFFFF;
@@ -90,10 +84,6 @@ button:active {
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
-}
-
-#setToText {
-    display: none;
 }
 
 h1 {
