@@ -1,9 +1,9 @@
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 0.9em;
     width: 360px;
     height: 600px;
-    background-color: rgba(46,115,220,0.05);
+    background-color: rgba(46, 115, 220, 0.05);
     overflow-x: hidden; /* fix horizontal scrollbar showing */
 }
 
@@ -36,28 +36,28 @@ a img {
     padding-right: 5px;
 }
 
-#github-image{
+#github-image {
     height: 40px;
 }
 
 button {
     align-items: center;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
     box-sizing: border-box;
     color: rgba(0, 0, 0, 0.85);
     cursor: pointer;
     display: inline-flex;
-    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: system-ui, -apple-system, system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 15px;
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
     margin: 0;
     min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
     position: relative;
     text-decoration: none;
     transition: all 250ms;
@@ -70,21 +70,21 @@ button {
 
 button:hover,
 button:focus {
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-  color: rgba(0, 0, 0, 0.65);
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(0, 0, 0, 0.65);
 }
 
 button:hover {
-  transform: translateY(-1px);
+    transform: translateY(-1px);
 }
 
 button:active {
-  background-color: #F0F0F1;
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
-  color: rgba(0, 0, 0, 0.65);
-  transform: translateY(0);
+    background-color: #f0f0f1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
 }
 
 h1 {
@@ -106,7 +106,6 @@ h2 {
     height: 2px;
     background-color: rgba(0, 0, 0, 1);
 }
-
 
 .grid {
     display: grid;
@@ -131,8 +130,11 @@ h2 {
 }
 
 .onoffswitch {
-    position: relative; width: 42px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    position: relative;
+    width: 42px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     display: inline-block;
     padding-left: 5px;
 }
@@ -142,40 +144,61 @@ h2 {
     pointer-events: none;
 }
 .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #999999;
+    border-radius: 20px;
 }
 .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
+    display: block;
+    width: 200%;
+    margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
 }
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 19px; padding: 0; line-height: 19px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 19px;
+    padding: 0;
+    line-height: 19px;
+    font-size: 14px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-    content: "";
+    content: '';
     padding-left: 10px;
-    background-color: #0094FF; color: #FFFFFF;
+    background-color: #0094ff;
+    color: #ffffff;
 }
 .onoffswitch-inner:after {
-    content: "";
+    content: '';
     padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
+    background-color: #eeeeee;
+    color: #999999;
     text-align: right;
 }
 .onoffswitch-switch {
-    display: block; width: 11px; margin: 4px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
+    display: block;
+    width: 11px;
+    margin: 4px;
+    background: #ffffff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
     right: 19px;
-    border: 2px solid #999999; border-radius: 20px;
-    transition: all 0.3s ease-in 0s; 
+    border: 2px solid #999999;
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+    right: 0px;
 }

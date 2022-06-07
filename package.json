@@ -6,7 +6,7 @@
   "scripts": {
     "code:lint": "eslint '**/**/*.{ts,tsx}'",
     "code:lint-fix": "eslint --fix '**/**/*.{ts,tsx}'",
-    "code:prettier": "prettier --write '**/**/*.{ts,tsx}'",
+    "code:prettier": "prettier --write '**/**/*.{ts,tsx,js,html,css}'",
     "code:typecheck": "./node_modules/.bin/tsc --noEmit",
     "app:chrome": "rimraf dist && cross-env BROWSER='chrome' webpack --config webpack/webpack.prod.js",
     "app:chrome-dev": "cross-env BROWSER='chrome' webpack --config webpack/webpack.dev.js --watch",
