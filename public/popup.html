@@ -10,7 +10,6 @@
         />
         <link rel="stylesheet" type="text/css" href="popup.css" />
         <title>Desmos Unlocked Control Panel</title>
-        <script type="application/javascript" src="node_modules/webextension-polyfill/dist/browser-polyfill.js"></script>
     </head>
     <body>
         <template id="grid-item-template">
@@ -55,6 +54,7 @@
         <p>⚠️ These shortcuts may have unexpected behavior</p>
         <div id="advanced" class="grid"></div>
         <hr class="thick-line"/>
+        <script type="application/javascript" src="browser-polyfill.js"></script>
         <script src="popup.js"></script>
     </body>
 </html>
