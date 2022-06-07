@@ -11,7 +11,7 @@
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwifN/k1fYEGc1zg1lsQh0gVSgCyIuDG36bKHYh+J5h6HlO0DkD96ZA8kc1+Asw0ht2TYZFUibhb5UpfVxoP8+9rEMjbLWMXWpkasTDVEEmEOPwuas3+ckTh5Frv9/o6uO+9n9wcyaKsEp1S9h2JQBPwRNwKyJpnoNDjJdUVmZeuVwxqJxes+SFq9y/I66JGuAOkoGvdZcQpwiq3u3AItbb5qy2Jjr+PawJl9o9wmRABpXH/BWicqIIgoSgt6rveHfBo6ciXZVbAc120BzOwT8Sas0OjUwduaqgxB1/E76OF5ZaqTwgq4YAC42AHGoPMOOHc6TTdVAiJIXeiOYdmTYQIDAQAB",
    "manifest_version": 2,
    "name": "Desmos Unlocked",
-   "page_action": {
+   "browser_action": {
       "default_icon": {
          "128": "images/desmos-unlocked-128.png",
          "48" : "images/desmos-unlocked-48.png",
