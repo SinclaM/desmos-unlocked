@@ -4,17 +4,11 @@ Chrome Web Store & Mozilla Add-on Store & Microsoft Edge Add-on Store Privacy Po
 Introduction
 ============
 
-Introduce your web extension
+Desmos Unlocked beautrifies the Desmos experience by allowing the user to easily
+customize Desmos' underlying math formula editor.
 
 Information We Collect
 ======================
 
-Does your web extension collect data?
+We don't collect data.
 
-- I collect data
-- I don't collect data
-
-How it uses cookies
-========================
-
-If your web extension uses cookies, describe where your extension uses cookies and why?
