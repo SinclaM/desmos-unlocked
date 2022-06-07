@@ -4,7 +4,7 @@ Chrome Web Store & Mozilla Add-on Store & Microsoft Edge Add-on Store Privacy Po
 Introduction
 ============
 
-Desmos Unlocked beautrifies the Desmos experience by allowing the user to easily
+Desmos Unlocked beautifies the Desmos experience by allowing the user to easily
 customize Desmos' underlying math formula editor.
 
 Information We Collect
