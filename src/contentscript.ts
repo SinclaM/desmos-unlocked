@@ -1,11 +1,11 @@
 async function initializeAutoCommands() {
-    let commands = await browser.storage.local.get('autoCommands');
-    let injectedCode = `function waitForDesmosLoaded() {
+    const commands = await browser.storage.local.get('autoCommands');
+    const injectedCode = `function waitForDesmosLoaded() {
                             let interval = 10; // ms
                             window.setTimeout(function() {
-                                if (window.Desmos?.MathQuill?.config) {
+                                if (window.Desmos?.MathQuill?.config && window.Desmos?.Calculator) {
                                     Desmos.MathQuill.config({
-                                        autoCommands: "${commands.autoCommands}"
+                                        autoCommands: '${commands.autoCommands}'
                                     });
                                 } else {
                                     waitForDesmosLoaded();
@@ -15,18 +15,18 @@ async function initializeAutoCommands() {
 
                         waitForDesmosLoaded();
                         `;
-    let script = document.createElement('script');
+    const script = document.createElement('script');
     script.textContent = injectedCode;
     (document.head || document.documentElement).appendChild(script);
     script.remove();
 }
 
 async function updateAutoCommands() {
-    let commands = await browser.storage.local.get('autoCommands');
-    let injectedCode = `Desmos.MathQuill.config({
-                            autoCommands: "${commands.autoCommands}"
+    const commands = await browser.storage.local.get('autoCommands');
+    const injectedCode = `Desmos.MathQuill.config({
+                            autoCommands: '${commands.autoCommands}'
                         });`;
-    let script = document.createElement('script');
+    const script = document.createElement('script');
     script.textContent = injectedCode;
     (document.head || document.documentElement).appendChild(script);
     script.remove();
