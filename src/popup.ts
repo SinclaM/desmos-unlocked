@@ -36,8 +36,15 @@ function massSet(toSet, opt) {
         item.querySelector<HTMLInputElement>('.onoffswitch-checkbox').checked = toSet.includes(item.id);
     });
 
+    // MathQuill requires autoCommands to be a non-empty space-delimited list of
+    // commands. So keepmeKEEPME should always remain in storage to avoid MathQuill
+    // throwing errors if the user disables all shortucts.
+    if (opt === 'autoCommands'){
+        toSet = 'keepmeKEEPME ' + toSet.join(' ');
+    }
+
     // [opt] because otherwise it will assign the literal string 'opt' as the field name.
-    browser.storage.local.set({ [opt]: toSet.join(' ') });
+    browser.storage.local.set({ [opt]: toSet });
 }
 
 // Create the DOM node for the items that will be placed in the grid.
