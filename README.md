@@ -13,3 +13,21 @@ Support for the following features planned:
 * Auto parenthesizing functions like `sin`, `log`, etc.
 * Customizing which operators (`+`, `-`, `*`, etc.) will bring the cursor out of a superscript or subscript.
 * Enabling shortucts in superscripts and subscripts.
+
+## Building from source
+### Operating system requirements
+I used MacOS Monterrey 12.0.1 to build this extension, but any modern OS should work.
+### Necessary tools
+`npm` is necessary. I am using `npm == 8.10.0` and `node` v18.0.0. These tools can be downloaded from https://nodejs.org/en/download/.
+### Commands to run
+In the project root directory (where `package.json` is located), first run:
+
+`npm install`
+
+Once `npm` has finished installing dependencies, run:
+
+`npm run app:firefox`, `npm run app:chrome`, or `npm run app:edge`
+
+to build for Firefox, Chrome, or Microsoft Edge, respectively.
+
+The built code will be located in the `dist` directory.
