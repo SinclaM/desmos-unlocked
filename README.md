@@ -14,11 +14,40 @@ Support for the following features planned:
 * Customizing which operators (`+`, `-`, `*`, etc.) will bring the cursor out of a superscript or subscript.
 * Enabling shortucts in superscripts and subscripts.
 
+## Download links
+* Firefox: https://addons.mozilla.org/en-US/firefox/addon/desmos-unlocked/
+* Chrome, Edge, Opera: __coming soon__
+
+## Installing locally
+You can also install the extension for Firefox, Chrome, and Edge as a temporary add-on. First, go to 
+[releases](https://github.com/SinclaM/desmos-unlocked/releases) and download the zipped distribuition for 
+your browser of choice from the latest release.
+
+### Firefox
+* Type `about:debugging` in the URL bar.
+* Click on __This Firefox__.
+* Under __Temporary Extensions__, click __Load Temporary Addon...__ and select the zip file you downloaded.
+* The extension will remain installed until you restart Firefox.
+
+### Google Chrome
+* Unzip the file you downloaded.
+* Type `chrome://extensions` in the URL bar.
+* Enable __Developer mode__ via the toggle on the top right of the page.
+* Click __Load unpacked__ and select the folder that the zip file expanded to when you unzipped it. Make sure to select the folder itself and not any files in the folder.
+* The extension will remain installed until you restart Chrome.
+
+### Microsoft Edge
+* Unzip the file you downloaded.
+* Type `edge://extensions` in the URL bar.
+* Enable __Developer mode__ via the toggle on the bottom left of the page.
+* Click __Load unpacked__ and select the folder that the zip file expanded to when you unzipped it. Make sure to select the folder itself and not any files in the folder.
+* The extension will remain installed until you restart Edge.
+
 ## Building from source
 ### Operating system requirements
-I used MacOS Monterrey 12.0.1 to build this extension, but any modern OS should work.
+All instructions were tested on macOS Monterrey 12.0.1, but any modern OS should work.
 ### Necessary tools
-`npm` is necessary. I am using `npm == 8.10.0` and `node` v18.0.0. These tools can be downloaded from https://nodejs.org/en/download/.
+`npm` is necessary. Instructions have been tested with `npm` version 8.10.0 and `node` version 18.0.0. These tools can be downloaded from https://nodejs.org/en/download/.
 ### Commands to run
 In the project root directory (where `package.json` is located), first run:
 
