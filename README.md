@@ -29,26 +29,12 @@ your browser of choice from the latest release.
 * Under __Temporary Extensions__, click __Load Temporary Addon...__ and select the zip file you downloaded.
 * The extension will remain installed until you restart Firefox.
 
-### Google Chrome
+### Google Chrome, Microsoft Edge, and Opera
 * Unzip the file you downloaded.
-* Type `chrome://extensions` in the URL bar.
-* Enable __Developer mode__ via the toggle on the top right of the page.
+* Type `about://extensions` in the URL bar.
+* Enable __Developer mode__ via the toggle.
 * Click __Load unpacked__ and select the folder that the zip file expanded to when you unzipped it. Make sure to select the folder itself and not any files in the folder.
-* The extension will remain installed until you restart Chrome.
-
-### Microsoft Edge
-* Unzip the file you downloaded.
-* Type `edge://extensions` in the URL bar.
-* Enable __Developer mode__ via the toggle on the bottom left of the page.
-* Click __Load unpacked__ and select the folder that the zip file expanded to when you unzipped it. Make sure to select the folder itself and not any files in the folder.
-* The extension will remain installed until you restart Edge.
-
-### Opera
-* Unzip the file you downloaded.
-* Type `opera://extensions` in the URL bar.
-* Enable __Developer mode__ via the toggle on the top right of the page.
-* Click __Load unpacked__ and select the folder that the zip file expanded to when you unzipped it. Make sure to select the folder itself and not any files in the folder.
-* The extension will remain installed until you restart Opera.
+* The extension will remain installed until you restart your browser.
 
 ## Building from source
 ### Operating system requirements
