@@ -12,6 +12,8 @@
     "app:chrome-dev": "cross-env BROWSER='chrome' webpack --config webpack/webpack.dev.js --watch",
     "app:edge": "rimraf dist && cross-env BROWSER='edge' webpack --config webpack/webpack.prod.js",
     "app:edge-dev": "cross-env BROWSER='edge' webpack --config webpack/webpack.dev.js --watch",
+    "app:opera": "rimraf dist && cross-env BROWSER='opera' webpack --config webpack/webpack.prod.js",
+    "app:opera-dev": "cross-env BROWSER='opera' webpack --config webpack/webpack.dev.js --watch",
     "app:firefox": "rimraf dist && cross-env BROWSER='firefox' webpack --config webpack/webpack.prod.js",
     "app:firefox-dev": "cross-env BROWSER='firefox' webpack --config webpack/webpack.dev.js --watch",
     "test:unit": "jest"
@@ -23,6 +25,7 @@
   "keywords": [
     "chrome extension",
     "microsoft edge extension",
+    "opera extension",
     "firefox addon",
     "web extension",
     "typescript",
