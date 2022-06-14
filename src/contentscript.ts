@@ -1,36 +1,19 @@
-async function initializeAutoCommands() {
-    const commands = await browser.storage.local.get('autoCommands');
-    const injectedCode = `function waitForDesmosLoaded() {
-                            let interval = 10; // ms
-                            window.setTimeout(function() {
-                                if (window.Desmos?.MathQuill?.config && window.Desmos?.Calculator) {
-                                    Desmos.MathQuill.config({
-                                        autoCommands: '${commands.autoCommands}'
-                                    });
-                                } else {
-                                    waitForDesmosLoaded();
-                                }
-                            }, interval);
-                        }
-
-                        waitForDesmosLoaded();
-                        `;
-    const script = document.createElement('script');
-    script.textContent = injectedCode;
-    (document.head || document.documentElement).appendChild(script);
-    script.remove();
-}
-
 async function updateAutoCommands() {
     const commands = await browser.storage.local.get('autoCommands');
-    const injectedCode = `Desmos.MathQuill.config({
-                            autoCommands: '${commands.autoCommands}'
-                        });`;
     const script = document.createElement('script');
-    script.textContent = injectedCode;
+    script.src = browser.runtime.getURL('inject.js');
+    const cmdString = commands.autoCommands.toString();
+    console.log(cmdString); //eslint-disable-line
+    script.onload = function () {
+        const data = {
+            autoCommands: cmdString,
+        };
+        document.dispatchEvent(new CustomEvent('yourCustomEvent', { detail: data }));
+
+        (this as any).remove();
+    };
     (document.head || document.documentElement).appendChild(script);
-    script.remove();
 }
 
-initializeAutoCommands();
+updateAutoCommands();
 browser.storage.onChanged.addListener(updateAutoCommands);

@@ -10,6 +10,7 @@ module.exports = {
         popup: path.join(__dirname, `../${SRC_DIR_NAME}/popup.ts`),
         background: path.join(__dirname, `../${SRC_DIR_NAME}/background/${browser}/background.ts`),
         contentscript: path.join(__dirname, `../${SRC_DIR_NAME}/contentscript.ts`),
+        inject: path.join(__dirname, `../${SRC_DIR_NAME}/inject.ts`),
     },
     output: {
         path: path.join(__dirname, `../${BUILD_DIR_NAME}`),

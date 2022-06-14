@@ -3,9 +3,9 @@
     "version": "1.0.2",
     "description": "Browser extension for better user control of the Desmos graphing calculator configuration",
     "permissions": ["declarativeContent", "activeTab", "storage"],
-    "manifest_version": 2,
+    "manifest_version": 3,
     "background": {
-        "scripts": ["browser-polyfill.js", "background.js"]
+        "service_workers": ["browser-polyfill.js", "background.js"]
     },
     "content_scripts": [
         {
@@ -15,7 +15,14 @@
         }
     ],
 
-    "browser_action": {
+    "web_accessible_resources": [
+        {
+            "resources": ["browser-polyfill.js", "inject.js"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+
+    "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "images/logo/16.png",
