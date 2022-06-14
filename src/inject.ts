@@ -15,6 +15,5 @@ function waitForDesmosLoaded(commands: string) {
 
 document.addEventListener('sendConfig', function (e) {
     const data = (e as any).detail;
-    console.log('received', data); 
     waitForDesmosLoaded(data);
 });

@@ -3,7 +3,6 @@ async function updateAutoCommands() {
     const script = document.createElement('script');
     script.src = browser.runtime.getURL('inject.js');
     const cmdString = commands.autoCommands.toString();
-    console.log(cmdString);
     script.onload = function () {
         const data = cmdString;
         document.dispatchEvent(new CustomEvent('sendConfig', { detail: data }));

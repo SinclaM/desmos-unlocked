@@ -3,4 +3,4 @@ node_modules/
 coverage/
 .DS_Store
 notes.md
-zips/
+private/
