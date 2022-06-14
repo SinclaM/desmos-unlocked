@@ -13,8 +13,8 @@ function waitForDesmosLoaded(commands: string) {
     }, interval);
 }
 
-document.addEventListener('yourCustomEvent', function (e) {
+document.addEventListener('sendConfig', function (e) {
     const data = (e as any).detail;
-    console.log('received', data); //eslint-disable-line
-    waitForDesmosLoaded(data.autoCommands);
+    console.log('received', data); 
+    waitForDesmosLoaded(data);
 });
