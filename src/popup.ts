@@ -20,14 +20,14 @@ setToDesmosDefault.onclick = function () {
 };
 
 // Log changes to storage for testing
-// browser.storage.onChanged.addListener(function (changes, namespace) {
-//     for (const [key, { oldValue, newValue }] of Object.entries(changes)) {
-//         console.log(
-//             `Storage key '${key}' in namespace '${namespace}' changed.`,
-//             `Old value was '${oldValue}', new value is '${newValue}'.`
-//         );
-//     }
-// });
+ browser.storage.onChanged.addListener(function (changes, namespace) {
+     for (const [key, { oldValue, newValue }] of Object.entries(changes)) {
+         console.log(
+             `Storage key '${key}' in namespace '${namespace}' changed.`,
+             `Old value was '${oldValue}', new value is '${newValue}'.`
+         );
+     }
+ });
 
 // Set many sliders at once. Used when the user presses a reset-to-default button.
 // toSet is an array of all the autoCommands to be set.

@@ -5,7 +5,7 @@
     "permissions": ["declarativeContent", "activeTab", "storage"],
     "manifest_version": 3,
     "background": {
-        "service_workers": ["browser-polyfill.js", "background.js"]
+        "service_worker": "background.js"
     },
     "content_scripts": [
         {
@@ -21,7 +21,6 @@
             "matches": ["<all_urls>"]
         }
     ],
-
     "action": {
         "default_popup": "popup.html",
         "default_icon": {

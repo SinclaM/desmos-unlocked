@@ -3,12 +3,10 @@ async function updateAutoCommands() {
     const script = document.createElement('script');
     script.src = browser.runtime.getURL('inject.js');
     const cmdString = commands.autoCommands.toString();
-    console.log(cmdString); //eslint-disable-line
+    console.log(cmdString);
     script.onload = function () {
-        const data = {
-            autoCommands: cmdString,
-        };
-        document.dispatchEvent(new CustomEvent('yourCustomEvent', { detail: data }));
+        const data = cmdString;
+        document.dispatchEvent(new CustomEvent('sendConfig', { detail: data }));
 
         (this as any).remove();
     };
