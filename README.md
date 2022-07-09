@@ -17,7 +17,7 @@ Support for the following features planned:
 ## Download links
 * Firefox: https://addons.mozilla.org/en-US/firefox/addon/desmos-unlocked/
 * Chrome: https://chrome.google.com/webstore/detail/desmos-unlocked/mgkcmbkophlnagckoodcmaeofginaokm
-* Edge: __coming soon__
+* Edge: https://microsoftedge.microsoft.com/addons/detail/desmos-unlocked/lojelmbmlhfakfgnngkmmfhjbianabgh 
 * Opera: https://addons.opera.com/en/extensions/details/desmos-unlocked/
 
 ## Installing locally
