@@ -1,20 +1,19 @@
 {
   "compilerOptions": {
-    "module": "ES6",
-    "target": "es6",
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "module": "es6",
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "noImplicitAny": false,
-    "sourceMap": false,
-    "rootDir": "src",
-    "outDir": "dist/js",
-    "noEmitOnError": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/web-ext-types"
-    ],
-    "types": [
-      "node"
-    ]
-  }
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "jsxFactory": "DCGView.jsx",
+    "target": "es2020",
+    "allowJs": true,
+    "strict": true,
+    "baseUrl": "src",
+    "noImplicitAny": false
+  },
+  "include": ["./src/"]
 }
+

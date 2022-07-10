@@ -11,19 +11,13 @@ module.exports = {
         background: path.join(__dirname, `../${SRC_DIR_NAME}/background/${browser}/background.ts`),
         contentscript: path.join(__dirname, `../${SRC_DIR_NAME}/contentscript.ts`),
         inject: path.join(__dirname, `../${SRC_DIR_NAME}/inject.ts`),
-        extend_mathquill: path.join(__dirname, `../${SRC_DIR_NAME}/extend_mathquill.ts`),
+        extend_mathquill: path.join(__dirname, `../${SRC_DIR_NAME}/extend_mathquill.js`),
         preload_content: path.join(__dirname, `../${SRC_DIR_NAME}/preload_content.ts`),
         preload_inject: path.join(__dirname, `../${SRC_DIR_NAME}/preload_inject.ts`),
     },
     output: {
         path: path.join(__dirname, `../${BUILD_DIR_NAME}`),
         filename: '[name].js',
-    },
-    optimization: {
-        splitChunks: {
-            name: 'vendor',
-            chunks: 'initial',
-        },
     },
     module: {
         rules: [

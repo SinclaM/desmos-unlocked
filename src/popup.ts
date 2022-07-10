@@ -96,7 +96,7 @@ async function getStorageData(key) {
 
 // Function to add/remove user config data corresponding to a slider that was
 // just clicked.
-async function storeConfig() {
+async function storeConfig(this: HTMLInputElement) {
     let wordToStore = this.parentElement.parentElement.id;
     const opt = this.parentElement.parentElement.getAttribute('opt');
     let currentlyStored = await getStorageData(opt);
