@@ -1,10 +1,11 @@
 /// <reference types="web-ext-types"/>
+import window from './globals/window';
 
 function waitForDesmosLoaded(commands: string) {
     const interval = 10; // ms
     window.setTimeout(function () {
-        if ((window as any).Desmos?.MathQuill?.config && (window as any).Desmos?.Calculator) {
-            (window as any).Desmos.MathQuill.config({
+        if (window.Desmos?.MathQuill?.config && window.Desmos?.Calculator) {
+            window.Desmos.MathQuill.config({
                 autoCommands: commands,
             });
         } else {

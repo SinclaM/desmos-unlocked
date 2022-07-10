@@ -1,4 +1,6 @@
+import window from './globals/window';
 import extendMathQuill from './extend_mathquill';
+import { pollForValue } from './utils/utils';
 
 console.log('Preload injected');
 
@@ -18,12 +20,12 @@ newDefine.amd = {
 };
 
 // trick to override `define`s
-(window as any).ALMOND_OVERRIDES = new Proxy(
+window.ALMOND_OVERRIDES = new Proxy(
     {},
     {
         get(target, prop, receiver) {
             if (prop === 'define') {
-                oldDefine = (window as any).define;
+                oldDefine = window.define;
                 return newDefine;
             } else {
                 return Reflect.get(target, prop, receiver);
@@ -36,7 +38,7 @@ function runCalculator() {
     /* The following script should have failed earlier because we blocked calculator_desktop.js.
   We copy it verbatim here to actually load the calculator. */
 
-    (window as any).require(
+    window.require(
         ['toplevel/calculator_desktop', 'testbridge', 'jquery'],
         function (calcPromise: any, TestBridge: any, $: any) {
             $('.dcg-loading-div-container').hide();
@@ -47,28 +49,13 @@ function runCalculator() {
                 if (calc === undefined) {
                     console.error('No calc');
                 }
-                (window as any).Calc = calc;
+                window.Calc = calc;
                 TestBridge.ready();
             });
         }
     );
 }
 
-async function pollForValue(func: any) {
-  return await _pollForValue(func);
-}
-
-function _pollForValue<T>(func: () => T) {
-  return new Promise<T>((resolve) => {
-    const interval = setInterval(() => {
-      const val = func();
-      if (val !== null && val !== undefined) {
-        clearInterval(interval);
-        resolve(val);
-      }
-    }, 50);
-  });
-}
 
 
 

@@ -31,7 +31,16 @@
         "no-console": 1,
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-inferrable-types": "off",
-        "@typescript-eslint/no-unused-vars": "error"
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-types": [
+            "off",
+            {
+                "types": {
+                    "Function": ""
+                }
+            }
+        ]
     },
     "settings": {
         "import/resolver": {
