@@ -1,6 +1,7 @@
 interface windowConfig extends Window {
   require(s: string[], callback: Function): void;
   require(s: string): any;
+  Calc: any;
   DesModder: any;
   define(
     moduleName: string,

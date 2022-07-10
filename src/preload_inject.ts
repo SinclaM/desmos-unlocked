@@ -2,14 +2,11 @@ import window from './globals/window';
 import extendMathQuill from './extend_mathquill';
 import { pollForValue } from './utils/utils';
 
-console.log('Preload injected');
-
 let oldDefine!: any;
 function newDefine(moduleName: string, dependencies: any, definition: any) {
     if (moduleName === 'mathquill_src') {
         // override should either be `{dependencies, definition}` or just `definition`
         dependencies = extendMathQuill;
-        console.log(dependencies);
     }
     return oldDefine(moduleName, dependencies, definition);
 }

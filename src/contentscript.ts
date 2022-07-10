@@ -15,13 +15,3 @@ async function updateAutoCommands() {
 updateAutoCommands();
 browser.storage.onChanged.addListener(updateAutoCommands);
 
-//function extendMathquill() {
-    //const script = document.createElement('script');
-    //script.src = browser.runtime.getURL('extend_mathquill.js');
-    //script.onload = function() {
-        //script.remove();
-    //};
-    //(document.head || document.documentElement).appendChild(script);
-//}
-
-//extendMathquill();
