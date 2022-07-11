@@ -8,8 +8,9 @@ interface windowConfig extends Window {
     dependencies: string[],
     definition: Function
   ): void;
-  ALMOND_OVERRIDES: { [key: string]: Function };
+  ALMOND_OVERRIDES: any;
   Desmos: any;
+  dsu_proxy: any;
 }
 
 declare let window: windowConfig;
