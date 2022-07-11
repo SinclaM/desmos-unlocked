@@ -1,6 +1,6 @@
 import window from './globals/window';
 import extendMathQuill from './extend_mathquill';
-import { pollForValue } from './utils/utils';
+//import { pollForValue } from './utils/utils';
 
 let oldDefine!: any;
 function newDefine(moduleName: string, dependencies: any, definition: any) {
@@ -31,52 +31,52 @@ window.ALMOND_OVERRIDES = new Proxy(
     }
 );
 
-function runCalculator() {
-    /* The following script should have failed earlier because we blocked calculator_desktop.js.
-  We copy it verbatim here to actually load the calculator. */
+//function runCalculator() {
+    //[> The following script should have failed earlier because we blocked calculator_desktop.js.
+  //We copy it verbatim here to actually load the calculator. */
 
-    window.require(
-        ['toplevel/calculator_desktop', 'testbridge', 'jquery'],
-        function (calcPromise: any, TestBridge: any, $: any) {
-            $('.dcg-loading-div-container').hide();
-            if (calcPromise === undefined) {
-                console.error('No calc promise');
-            }
-            calcPromise.then(function (calc: any) {
-                if (calc === undefined) {
-                    console.error('No calc');
-                }
-                window.Calc = calc;
-                TestBridge.ready();
-            });
-        }
-    );
-}
-
-
+    //window.require(
+        //['toplevel/calculator_desktop', 'testbridge', 'jquery'],
+        //function (calcPromise: any, TestBridge: any, $: any) {
+            //$('.dcg-loading-div-container').hide();
+            //if (calcPromise === undefined) {
+                //console.error('No calc promise');
+            //}
+            //calcPromise.then(function (calc: any) {
+                //if (calc === undefined) {
+                    //console.error('No calc');
+                //}
+                //window.Calc = calc;
+                //TestBridge.ready();
+            //});
+        //}
+    //);
+//}
 
 
-pollForValue(
-  () =>
-    (
-      document.querySelector(
-        'script[src^=\'/assets/build/calculator_desktop\']'
-      ) as HTMLScriptElement
-    )?.src
-).then((src) => {
-  /* we blocked calculator_desktop.js earlier to ensure that the preload/override script runs first.
-  Now we load it, but with '?' appended to prevent the web request rules from blocking it */
-  const script = document.createElement('script');
-  script.src = src + '??';
-  script.async = false;
-  script.onload = () => {
-    // remove from DOM
-    script.remove();
-    runCalculator();
-  };
-  script.onerror = () => {
-    console.error('Injected script onerror');
-  };
-  document.body.appendChild(script);
-});
+
+
+//pollForValue(
+  //() =>
+    //(
+      //document.querySelector(
+        //'script[src^=\'/assets/build/calculator_desktop\']'
+      //) as HTMLScriptElement
+    //)?.src
+//).then((src) => {
+  //[> we blocked calculator_desktop.js earlier to ensure that the preload/override script runs first.
+  //Now we load it, but with '?' appended to prevent the web request rules from blocking it */
+  //const script = document.createElement('script');
+  //script.src = src + '??';
+  //script.async = false;
+  //script.onload = () => {
+    //// remove from DOM
+    //script.remove();
+    //runCalculator();
+  //};
+  //script.onerror = () => {
+    //console.error('Injected script onerror');
+  //};
+  //document.body.appendChild(script);
+//});
 

@@ -10,9 +10,14 @@ browser.runtime.onInstalled.addListener(function () {
 });
 
 browser.webRequest.onBeforeRequest.addListener(
-    ({ url }) => ({
-        cancel: url.endsWith('.js') || url.endsWith('.js?'),
-    }),
+    function () {
+        browser.tabs.query({ active: true, currentWindow: true }).then(function (tabs) {
+            browser.tabs.sendMessage(tabs[0].id, { injectPreload: true }).then(function () {
+                console.log('Response received');
+            });
+        });
+        return { cancel: false };
+    },
     {
         urls: [
             'https://www.desmos.com/assets/build/calculator_desktop-*.js',
