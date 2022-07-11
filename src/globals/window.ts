@@ -10,7 +10,7 @@ interface windowConfig extends Window {
   ): void;
   ALMOND_OVERRIDES: any;
   Desmos: any;
-  dsu_proxy: any;
+  dsuProxy: any;
 }
 
 declare let window: windowConfig;
