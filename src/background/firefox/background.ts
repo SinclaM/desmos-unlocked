@@ -10,14 +10,31 @@ browser.runtime.onInstalled.addListener(function () {
 });
 
 browser.webRequest.onBeforeRequest.addListener(
-    async function () {
+    async function ({ url }) {
+        if (url === 'https://www.desmos.com/assets/build/calculator_desktop-this_does_not_exist.js') {
+            return { cancel: false };
+        }
+
         const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-        await browser.tabs.sendMessage(tabs[0].id, { injectPreload: true });
-        await new Promise(r => setTimeout(r, 500)); // FIXME: fix race condiiton
-        return { cancel : false };
+        if (url.endsWith('.js')) {
+            console.log(url);
+            const response = await browser.tabs.sendMessage(tabs[0].id, { checkDesmodder: true });
+            console.log('Message from the content script:');
+            console.log((response as any).response);
+            if (!(response as any).response) {
+                await browser.tabs.sendMessage(tabs[0].id, { injectPreload: true });
+            }
+            return { cancel: false };
+        }
+
+        if (url.endsWith('.js?')) {
+            await browser.tabs.sendMessage(tabs[0].id, { injectPreload: true });
+            return { cancel: false };
+        }
     },
     {
         urls: [
+            'https://www.desmos.com/assets/build/calculator_desktop-*.js',
             'https://www.desmos.com/assets/build/calculator_desktop-*.js?',
         ],
     },
