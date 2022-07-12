@@ -16,11 +16,11 @@ newDefine.amd = {
     jQuery: true,
 };
 
-window.dsuProxy = new Proxy(
+window.ALMOND_OVERRIDES = new Proxy(
     window.ALMOND_OVERRIDES ? window.ALMOND_OVERRIDES : {},
     {
         get(target, prop, receiver) {
-            console.log('dsuProxy working');
+            console.log('ALMOND_OVERRIDES proxy success');
             if (prop === 'define') {
                 oldDefine = window.define;
                 return newDefine;
@@ -30,6 +30,4 @@ window.dsuProxy = new Proxy(
         },
     }
 );
-window.ALMOND_OVERRIDES = window.dsuProxy;
-delete window.dsuProxy;
 

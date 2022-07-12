@@ -11,25 +11,36 @@ browser.runtime.onInstalled.addListener(function () {
 
 browser.webRequest.onBeforeRequest.addListener(
     async function ({ url }) {
+        // This url is used by preload_content to check for DesModder activity.
+        // We ignore it here to avoid an infinite recursion.
         if (url === 'https://www.desmos.com/assets/build/calculator_desktop-this_does_not_exist.js') {
-            return { cancel: false };
+            return;
         }
 
         const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+
         if (url.endsWith('.js')) {
             console.log(url);
-            const response = await browser.tabs.sendMessage(tabs[0].id, { checkDesmodder: true });
+            const isDesmodderActive: boolean | void = await browser.tabs.sendMessage(tabs[0].id, {
+                message: 'check-desmodder',
+            });
             console.log('Message from the content script:');
-            console.log((response as any).response);
-            if (!(response as any).response) {
-                await browser.tabs.sendMessage(tabs[0].id, { injectPreload: true });
+            console.log(isDesmodderActive);
+
+            // If DesModder is not active, then we should immediately inject the preload script
+            // and begin overrides. There won't be another opportunity.
+            // If DesModder is active, then we know that DesModder's own webRequest rules will
+            // block this script anyway, and we don't want to define ALMOND_OVERRIDES before
+            // DesModder does, so we can wait until DesModder makes another request.
+            if (!isDesmodderActive) {
+                await browser.tabs.sendMessage(tabs[0].id, { message: 'inject-preload' });
             }
-            return { cancel: false };
         }
 
+        // This url being requested means DesModder is active and trying to load the calculator.
+        // Now is the time to inject the preload.
         if (url.endsWith('.js?')) {
-            await browser.tabs.sendMessage(tabs[0].id, { injectPreload: true });
-            return { cancel: false };
+            await browser.tabs.sendMessage(tabs[0].id, { message: 'inject-preload' });
         }
     },
     {
