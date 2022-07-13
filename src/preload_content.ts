@@ -14,7 +14,6 @@ browser.runtime.onMessage.addListener(async function (request) {
                 console.log('preload_content reports DesModder is active');
             }
             return Promise.resolve(isDesmodderActive);
-            break;
         case 'inject-preload':
             console.log(`preload_content heard message: ${request.message}`);
             await new Promise<void>(function (resolve) {
@@ -28,7 +27,6 @@ browser.runtime.onMessage.addListener(async function (request) {
                 (document.head || document.documentElement).appendChild(script);
             });
             return Promise.resolve();
-            break;
         case 'redirect-detected':
             console.log(`preload_content heard message: ${request.message}`);
             console.log(`url detected is ${request.url}`);
@@ -53,7 +51,6 @@ browser.runtime.onMessage.addListener(async function (request) {
                 (document.head || document.documentElement).appendChild(script);
             });
             return Promise.resolve();
-            break;
     }
 });
 
