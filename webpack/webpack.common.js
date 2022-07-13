@@ -14,6 +14,8 @@ module.exports = {
         extend_mathquill: path.join(__dirname, `../${SRC_DIR_NAME}/extend_mathquill.js`),
         preload_content: path.join(__dirname, `../${SRC_DIR_NAME}/preload_content.ts`),
         preload_inject: path.join(__dirname, `../${SRC_DIR_NAME}/preload_inject.ts`),
+        intercept: path.join(__dirname, `../${SRC_DIR_NAME}/intercept.ts`),
+        run_calculator: path.join(__dirname, `../${SRC_DIR_NAME}/run_calculator.ts`),
     },
     output: {
         path: path.join(__dirname, `../${BUILD_DIR_NAME}`),
@@ -48,6 +50,11 @@ module.exports = {
                 { from: './popup.html', to: `../${BUILD_DIR_NAME}/popup.html`, context: 'public' },
                 { from: './popup.css', to: `../${BUILD_DIR_NAME}/popup.css`, context: 'public' },
                 { from: `${browser}_manifest.json`, to: `../${BUILD_DIR_NAME}/manifest.json`, context: 'public' },
+                {
+                    from: 'net_request_rules.json',
+                    to: `../${BUILD_DIR_NAME}/net_request_rules.json`,
+                    context: 'public',
+                },
             ],
         }),
     ],

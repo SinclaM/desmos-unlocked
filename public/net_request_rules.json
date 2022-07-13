@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {"extensionPath": "/intercept.js"}
+    },
+    "condition": {
+      "urlFilter": "https://www.desmos.com/assets/build/calculator_desktop-*.js|"
+    }
+  }
+]
+

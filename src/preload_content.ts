@@ -29,6 +29,31 @@ browser.runtime.onMessage.addListener(async function (request) {
             });
             return Promise.resolve();
             break;
+        case 'redirect-detected':
+            console.log(`preload_content heard message: ${request.message}`);
+            console.log(`url detected is ${request.url}`);
+            await new Promise<void>(function (resolve) {
+                const script = document.createElement('script');
+                script.src = browser.runtime.getURL('preload_inject.js');
+                script.onload = function () {
+                    (this as any).remove();
+                    resolve();
+                };
+                script.onerror = (e) => console.log(e);
+                (document.head || document.documentElement).appendChild(script);
+            });
+            await new Promise<void>(function (resolve) {
+                const script = document.createElement('script');
+                script.src = browser.runtime.getURL('run_calculator.js');
+                script.onload = function () {
+                    (this as any).remove();
+                    resolve();
+                };
+                script.onerror = (e) => console.log(e);
+                (document.head || document.documentElement).appendChild(script);
+            });
+            return Promise.resolve();
+            break;
     }
 });
 
