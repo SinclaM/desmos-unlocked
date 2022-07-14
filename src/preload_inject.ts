@@ -1,6 +1,5 @@
 import window from './globals/window';
 import extendMathQuill from './extend_mathquill';
-//import { pollForValue } from './utils/utils';
 
 let oldDefine!: any;
 function newDefine(moduleName: string, dependencies: any, definition: any) {

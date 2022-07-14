@@ -1,4 +1,7 @@
 /* eslint-disable */
+
+/* Taken from the (Desmos fork of) MathQuill source code */
+
 export default function() {
     var L = -1;
     var R = 1;

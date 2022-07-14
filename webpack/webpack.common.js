@@ -14,7 +14,7 @@ module.exports = {
         extend_mathquill: path.join(__dirname, `../${SRC_DIR_NAME}/extend_mathquill.js`),
         preload_content: path.join(__dirname, `../${SRC_DIR_NAME}/preload_content.ts`),
         preload_inject: path.join(__dirname, `../${SRC_DIR_NAME}/preload_inject.ts`),
-        intercept: path.join(__dirname, `../${SRC_DIR_NAME}/intercept.ts`),
+        empty: path.join(__dirname, `../${SRC_DIR_NAME}/empty.ts`),
         run_calculator: path.join(__dirname, `../${SRC_DIR_NAME}/run_calculator.ts`),
     },
     output: {

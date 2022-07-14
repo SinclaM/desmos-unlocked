@@ -9,6 +9,9 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
+// Listen for redirects from the a request to calculator_desktop. When this redirect happends,
+// we want to send a message to the preload content script to begin module overrides and
+// initialize the calculator.
 chrome.webRequest.onBeforeRedirect.addListener(
     async function ({ url }) {
         console.log(url.endsWith('?'));

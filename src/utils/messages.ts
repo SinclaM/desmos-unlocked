@@ -1,3 +1,5 @@
+/* Taken from the DesModder repo and needed for DesModder compatibility */
+
 /*
 Post message conventions:
   Always have a type
