@@ -42,11 +42,6 @@ module.exports = {
                     to: `../${BUILD_DIR_NAME}/browser-polyfill.js`,
                     context: 'public',
                 },
-                {
-                    from: '../node_modules/webextension-polyfill/dist/browser-polyfill.js.map',
-                    to: `../${BUILD_DIR_NAME}/browser-polyfill.js.map`,
-                    context: 'public',
-                },
                 { from: './popup.html', to: `../${BUILD_DIR_NAME}/popup.html`, context: 'public' },
                 { from: './popup.css', to: `../${BUILD_DIR_NAME}/popup.css`, context: 'public' },
                 { from: `${browser}_manifest.json`, to: `../${BUILD_DIR_NAME}/manifest.json`, context: 'public' },
