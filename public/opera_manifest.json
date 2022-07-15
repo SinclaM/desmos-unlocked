@@ -5,7 +5,7 @@
     "permissions": ["https://*.desmos.com/*", "storage", "webRequest", "webRequestBlocking"],
     "manifest_version": 2,
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["browser-polyfill.js", "background.js"],
         "persistent": true
     },
     "content_scripts": [
