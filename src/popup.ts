@@ -1,3 +1,6 @@
+import {desmosDefualtAutoCommands, basicAutoCommands, advancedAutoCommands} from './utils/autoCommands';
+import {massSet, storeConfig, populateGrid} from './utils/utils';
+
 const setToDefault = document.getElementById('set-to-default');
 const setToDesmosDefault = document.getElementById('set-to-desmos-default');
 
@@ -29,191 +32,9 @@ setToDesmosDefault.onclick = function () {
 //     }
 // });
 
-// Set many sliders at once. Used when the user presses a reset-to-default button.
-// toSet is an array of all the autoCommands to be set.
-function massSet(toSet, opt) {
-    document.querySelectorAll('.grid .latex-item').forEach(function (item) {
-        item.querySelector<HTMLInputElement>('.onoffswitch-checkbox').checked = toSet.includes(item.id);
-    });
-
-    // MathQuill requires autoCommands to be a non-empty space-delimited list of
-    // commands. So keepmeKEEPME should always remain in storage to avoid MathQuill
-    // throwing errors if the user disables all shortucts.
-    if (opt === 'autoCommands'){
-        toSet = 'keepmeKEEPME ' + toSet.join(' ');
-    }
-
-    // [opt] because otherwise it will assign the literal string 'opt' as the field name.
-    browser.storage.local.set({ [opt]: toSet });
-}
-
-// Create the DOM node for the items that will be placed in the grid.
-// e.g. 'α alpha [slider]'
-// Using templates allows the html for the popup to be much more concise,
-// but then javascript must dynamically insert these into the DOM.
-// Not sure what best practices are.
-function createGridItem(templateID, symbol, shortcut, commands) {
-    let html = document.getElementById(templateID).innerHTML;
-    html = html.replace(/#symbol#/g, symbol);
-    html = html.replace(/#shortcut#/g, shortcut);
-    const node = new DOMParser().parseFromString(html, 'text/html').body.firstElementChild as HTMLElement;
-    node.querySelector<HTMLInputElement>('.onoffswitch-checkbox').checked = commands.includes(shortcut);
-
-    // Stop overflow of long shortcuts by letting them span both columns.
-    // This feels like a bad way of styling this but oh well.
-    if (shortcut.length > 9) {
-        node.style.gridColumn = '1 / span 2';
-    }
-
-    return node;
-}
-
-// Populate the grid with fancy sliders for all the symbols -> shortcuts in dict.
-async function populateGrid(templateID, gridID, dict) {
-    let commands = await getStorageData('autoCommands');
-    commands = commands.autoCommands.split(' ');
-    const grid = document.getElementById(gridID);
-    for (const shortcut in dict) {
-        grid.append(createGridItem(templateID, dict[shortcut], shortcut, commands));
-    }
-}
-
-// Function to retreive the user config data corresponding to the given key
-// e.g. getStorageData('autoCommands') -> 'alpha beta gamma'
-//const getStorageData = (key) =>
-//new Promise((resolve, reject) =>
-//browser.storage.local.get(key, (result) =>
-//browser.runtime.lastError
-//? reject(Error(browser.runtime.lastError.message))
-//: resolve(result)
-//)
-//);
-
-async function getStorageData(key) {
-    const value = await browser.storage.local.get(key);
-    return value;
-}
-
-// Function to add/remove user config data corresponding to a slider that was
-// just clicked.
-async function storeConfig(this: HTMLInputElement) {
-    let wordToStore = this.parentElement.parentElement.id;
-    const opt = this.parentElement.parentElement.getAttribute('opt');
-    let currentlyStored = await getStorageData(opt);
-    currentlyStored = currentlyStored.autoCommands;
-    if (this.checked) {
-        if (currentlyStored !== '') {
-            wordToStore = ' ' + wordToStore;
-        }
-        browser.storage.local.set({ autoCommands: currentlyStored + wordToStore });
-    } else {
-        const newStorage = currentlyStored
-            .split(' ')
-            .filter((word) => word != wordToStore)
-            .join(' ');
-        browser.storage.local.set({ autoCommands: newStorage });
-    }
-}
-
 // Add all the dynamically loaded nodes to the DOM using templates and give
 // sliders their funcionality
 async function initialize() {
-    // Desmos default symbols and their shortcuts
-    const desmosDefualtAutoCommands = {
-        sqrt: '√',
-        cbrt: '∛',
-        nthroot: '∜',
-        sum: 'Σ',
-        prod: '∏',
-        int: '∫',
-        percent: '%',
-        infinity: '∞',
-        infty: '∞',
-        alpha: 'α',
-        beta: 'β',
-        theta: 'θ',
-        pi: 'π',
-        tau: 'τ',
-        phi: 'ϕ',
-    };
-
-    // basic shortucts and their symbols
-    const basicAutoCommands = {
-        gamma: 'γ',
-        digamma: 'ϝ',
-        Gamma: 'Γ',
-        delta: 'δ',
-        Delta: 'Δ',
-        epsilon: 'ϵ',
-        //varepsilon: 'ε',
-        zeta: 'ζ',
-        eta: 'η',
-        iota: 'ι',
-        kappa: 'κ',
-        //varkappa: 'ϰ',
-        lambda: 'λ',
-        Lambda: 'Λ',
-        mu: 'μ',
-        nu: 'ν',
-        xi: 'ξ',
-        //varpi: 'ϖ',
-        Pi: 'Π',
-        rho: 'ρ',
-        //varrho: 'ϱ',
-        sigma: 'σ',
-        //varsigma: 'ς',
-        Sigma: 'Σ',
-        upsilon: 'υ',
-        Upsilon: 'Υ',
-        //varphi: 'φ',
-        Phi: 'Φ',
-        chi: 'χ',
-        psi: 'ψ',
-        Psi: 'Ψ',
-        omega: 'ω',
-        Omega: 'Ω',
-        square: '□',
-        mid: '|',
-        parallel: '∥',
-        nparallel: '∦',
-        perp: '⊥',
-        pm: '±',
-        mp: '∓',
-        to: '→',
-        le: '≤',
-        ge: '≥',
-        ne: '≠',
-        times: '×',
-        div: '÷',
-        approx: '≈',
-    };
-
-    const advancedAutoCommands = {
-        dot: ' ̇',
-        hat: 'ˆ',
-        vec: ' ⃗',
-        bar: '¯',
-        tidle: ' ̃',
-        langle: '⟨',
-        rangle: '⟩',
-        lVert: '||',
-        rVert: '||',
-        binom: '( )',
-        coprod: '',
-        frac: '',
-        underline: '⎯',
-        overline: '¯',
-        overarc: '⌒',
-        mathrm: '',
-        mathit: '',
-        mathbf: '',
-        mathsf: '',
-        overrightarrow: '→',
-        overleftarrow: '←',
-        overleftrightarrow: '⟷',
-        MathQuillMathField: '',
-    };
-
     await populateGrid('grid-item-template', 'desmos-default', desmosDefualtAutoCommands);
     await populateGrid('grid-item-template', 'basic', basicAutoCommands);
     await populateGrid('grid-item-template', 'advanced', advancedAutoCommands);
@@ -225,3 +46,5 @@ async function initialize() {
 }
 
 document.addEventListener('DOMContentLoaded', initialize);
+
+
