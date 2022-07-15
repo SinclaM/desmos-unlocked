@@ -1,22 +1,15 @@
 /// <reference types="web-ext-types"/>
-//import window from './globals/window';
-
-function waitForDesmosLoaded(commands: string) {
-    const interval = 10; // ms
-    window.setTimeout(function () {
-        if ((window as any).Desmos?.MathQuill?.config && (window as any).Desmos?.Calculator) {
-            (window as any).Desmos.MathQuill.config({
-                autoCommands: commands,
-            });
-        } else {
-            waitForDesmosLoaded(commands);
-        }
-    }, interval);
-}
+import { pollForValue } from './utils/utils';
+import window from './globals/window';
 
 const handler = (({ detail }: CustomEvent<string>) => {
-    waitForDesmosLoaded(detail);
-    document.removeEventListener('send-config', handler);
+    // Have to wait for all the preload modifications to finish
+    pollForValue(() => window.Desmos?.MathQuill?.config).then(() => {
+        (window as any).Desmos.MathQuill.config({
+            autoCommands: detail,
+        });
+        document.removeEventListener('send-config', handler);
+    });
 }) as EventListener;
 
 document.addEventListener('send-config', handler);
