@@ -2,20 +2,26 @@
     "name": "Desmos Unlocked",
     "version": "1.0.3",
     "description": "Browser extension for better user control of the Desmos graphing calculator configuration",
-    "permissions": ["storage"],
+    "permissions": ["https://*.desmos.com/*", "storage", "webRequest", "webRequestBlocking"],
     "manifest_version": 2,
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["background.js"],
+        "persistent": true
     },
     "content_scripts": [
         {
-            "js": ["browser-polyfill.js", "contentscript.js"],
+            "js": ["browser-polyfill.js", "content.js"],
             "matches": ["https://www.desmos.com/calculator/*"],
             "run_at": "document_idle"
+        },
+        {
+            "js": ["browser-polyfill.js", "preloadContent.js"],
+            "matches": ["https://www.desmos.com/calculator*"],
+            "run_at": "document_start"
         }
     ],
 
-    "web_accessible_resources": ["inject.js"],
+    "web_accessible_resources": ["script.js", "preloadScript.js"],
 
     "browser_action": {
         "default_popup": "popup.html",
