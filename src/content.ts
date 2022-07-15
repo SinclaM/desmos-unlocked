@@ -5,9 +5,9 @@ async function updateAutoCommands() {
     const cmdString = commands.autoCommands.toString();
     script.onload = function () {
         const data = cmdString;
-        document.dispatchEvent(new CustomEvent('sendConfig', { detail: data }));
+        document.dispatchEvent(new CustomEvent('send-config', { detail: data }));
 
-        (this as any).remove();
+        script.remove();
     };
     (document.head || document.documentElement).appendChild(script);
 }

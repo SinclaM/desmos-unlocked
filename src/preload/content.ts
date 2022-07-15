@@ -29,7 +29,7 @@ browser.runtime.onMessage.addListener(async function (request) {
                 const script = document.createElement('script');
                 script.src = browser.runtime.getURL('preloadScript.js');
                 script.onload = function () {
-                    (this as any).remove();
+                    script.remove();
                     resolve();
                 };
                 script.onerror = (e) => console.log(e);
@@ -52,7 +52,7 @@ browser.runtime.onMessage.addListener(async function (request) {
                 // The attribute just needs a truthy value.
                 script.setAttribute('run-calculator', 'run-calculator');
                 script.onload = function () {
-                    (this as any).remove();
+                    script.remove();
                     resolve();
                 };
                 script.onerror = (e) => console.log(e);

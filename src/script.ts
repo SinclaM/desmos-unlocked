@@ -14,10 +14,9 @@ function waitForDesmosLoaded(commands: string) {
     }, interval);
 }
 
-document.addEventListener('sendConfig', handler);
+const handler = (({ detail }: CustomEvent<string>) => {
+    waitForDesmosLoaded(detail);
+    document.removeEventListener('send-config', handler);
+}) as EventListener;
 
-function handler (e) {
-    const data = (e as any).detail;
-    waitForDesmosLoaded(data);
-    document.removeEventListener('sendConfig', handler);
-}
+document.addEventListener('send-config', handler);
