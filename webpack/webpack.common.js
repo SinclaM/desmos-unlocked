@@ -10,10 +10,10 @@ baseConfig = {
     entry: {
         popup: path.join(__dirname, `../${SRC_DIR_NAME}/popup.ts`),
         background: path.join(__dirname, `../${SRC_DIR_NAME}/background/${browser}/background.ts`),
-        contentscript: path.join(__dirname, `../${SRC_DIR_NAME}/contentscript.ts`),
-        inject: path.join(__dirname, `../${SRC_DIR_NAME}/inject.ts`),
-        preload_content: path.join(__dirname, `../${SRC_DIR_NAME}/preload_content.ts`),
-        preload_inject: path.join(__dirname, `../${SRC_DIR_NAME}/preload_inject.ts`),
+        content: path.join(__dirname, `../${SRC_DIR_NAME}/content.ts`),
+        script: path.join(__dirname, `../${SRC_DIR_NAME}/script.ts`),
+        preloadContent: path.join(__dirname, `../${SRC_DIR_NAME}/preload/content.ts`),
+        preloadScript: path.join(__dirname, `../${SRC_DIR_NAME}/preload/script.ts`),
     },
     output: {
         path: path.join(__dirname, `../${BUILD_DIR_NAME}`),
@@ -48,8 +48,8 @@ if (browser === 'firefox') {
 } else {
     module.exports = merge(baseConfig, {
         entry: {
-            empty: path.join(__dirname, `../${SRC_DIR_NAME}/empty.ts`),
-            run_calculator: path.join(__dirname, `../${SRC_DIR_NAME}/run_calculator.ts`),
+            empty: path.join(__dirname, `../${SRC_DIR_NAME}/preload/empty.ts`),
+            run_calculator: path.join(__dirname, `../${SRC_DIR_NAME}/preload/run_calculator.ts`),
         },
         plugins: [
             new CopyPlugin({

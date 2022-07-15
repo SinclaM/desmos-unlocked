@@ -2,22 +2,27 @@
     "name": "Desmos Unlocked",
     "version": "1.0.3",
     "description": "Browser extension for better user control of the Desmos graphing calculator configuration",
-    "permissions": ["storage"],
+    "permissions": ["storage", "declarativeNetRequest", "declarativeNetRequestWithHostAccess", "webRequest"],
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
     },
     "content_scripts": [
         {
-            "js": ["browser-polyfill.js", "contentscript.js"],
+            "js": ["browser-polyfill.js", "content.js"],
             "matches": ["https://www.desmos.com/calculator/*"],
             "run_at": "document_idle"
+        },
+        {
+            "js": ["browser-polyfill.js", "preloadContent.js"],
+            "matches": ["https://www.desmos.com/calculator*"],
+            "run_at": "document_start"
         }
     ],
-
+    "host_permissions": ["*://www.desmos.com/calculator/*"],
     "web_accessible_resources": [
         {
-            "resources": ["browser-polyfill.js", "inject.js"],
+            "resources": ["browser-polyfill.js", "script.js", "preloadScript.js", "run_calculator.js", "empty.js"],
             "matches": ["<all_urls>"]
         }
     ],
@@ -29,6 +34,15 @@
             "48": "images/logo/48.png",
             "128": "images/logo/128.png"
         }
+    },
+    "declarative_net_request": {
+        "rule_resources": [
+            {
+                "id": "ruleset_1",
+                "enabled": true,
+                "path": "net_request_rules.json"
+            }
+        ]
     },
     "icons": {
         "16": "images/logo/16.png",

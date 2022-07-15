@@ -1,4 +1,4 @@
-import window from './globals/window';
+import window from '../globals/window';
 import extendMathQuill from './extend_mathquill';
 
 let oldDefine!: any;

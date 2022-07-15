@@ -27,7 +27,7 @@ browser.runtime.onMessage.addListener(async function (request) {
             console.log(`preload_content heard message: ${request.message}`);
             await new Promise<void>(function (resolve) {
                 const script = document.createElement('script');
-                script.src = browser.runtime.getURL('preload_inject.js');
+                script.src = browser.runtime.getURL('preloadInject.js');
                 script.onload = function () {
                     (this as any).remove();
                     resolve();
@@ -45,7 +45,7 @@ browser.runtime.onMessage.addListener(async function (request) {
             console.log(`url detected is ${request.url}`);
             await new Promise<void>(function (resolve) {
                 const script = document.createElement('script');
-                script.src = browser.runtime.getURL('preload_inject.js');
+                script.src = browser.runtime.getURL('preloadScript.js');
                 script.onload = function () {
                     (this as any).remove();
                     resolve();

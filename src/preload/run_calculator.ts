@@ -1,7 +1,7 @@
-import window from './globals/window';
-import { postMessageUp, listenToMessageDown } from './utils/messages';
-import injectScript from './utils/injectScript';
-import { pollForValue } from './utils/utils';
+import window from '../globals/window';
+import { postMessageUp, listenToMessageDown } from '../utils/messages';
+import injectScript from '../utils/injectScript';
+import { pollForValue } from '../utils/utils';
 
 // The function to initialize the calculator, copied almost verbatim from
 // the a script on desmos.com/calculator which we've blocked.
