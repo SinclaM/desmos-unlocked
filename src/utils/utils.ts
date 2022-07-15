@@ -70,12 +70,12 @@ export async function storeConfig(this: HTMLInputElement) {
         if (currentlyStored !== '') {
             wordToStore = ' ' + wordToStore;
         }
-        browser.storage.local.set({ autoCommands: currentlyStored + wordToStore });
+        browser.storage.local.set({ [opt]: currentlyStored + wordToStore });
     } else {
         const newStorage = currentlyStored
             .split(' ')
             .filter((word) => word != wordToStore)
             .join(' ');
-        browser.storage.local.set({ autoCommands: newStorage });
+        browser.storage.local.set({ [opt]: newStorage });
     }
 }

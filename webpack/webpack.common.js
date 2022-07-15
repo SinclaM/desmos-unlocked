@@ -49,7 +49,6 @@ if (browser === 'firefox') {
     module.exports = merge(baseConfig, {
         entry: {
             empty: path.join(__dirname, `../${SRC_DIR_NAME}/preload/empty.ts`),
-            run_calculator: path.join(__dirname, `../${SRC_DIR_NAME}/preload/run_calculator.ts`),
         },
         plugins: [
             new CopyPlugin({

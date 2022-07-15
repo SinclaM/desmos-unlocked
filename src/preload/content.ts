@@ -46,16 +46,11 @@ browser.runtime.onMessage.addListener(async function (request) {
             await new Promise<void>(function (resolve) {
                 const script = document.createElement('script');
                 script.src = browser.runtime.getURL('preloadScript.js');
-                script.onload = function () {
-                    (this as any).remove();
-                    resolve();
-                };
-                script.onerror = (e) => console.log(e);
-                (document.head || document.documentElement).appendChild(script);
-            });
-            await new Promise<void>(function (resolve) {
-                const script = document.createElement('script');
-                script.src = browser.runtime.getURL('run_calculator.js');
+
+                // Tell the injected script to initialize the calculator after finishing
+                // its module overrides.
+                // The attribute just needs a truthy value.
+                script.setAttribute('run-calculator', 'run-calculator');
                 script.onload = function () {
                     (this as any).remove();
                     resolve();

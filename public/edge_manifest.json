@@ -22,7 +22,7 @@
     "host_permissions": ["*://www.desmos.com/calculator/*"],
     "web_accessible_resources": [
         {
-            "resources": ["browser-polyfill.js", "script.js", "preloadScript.js", "run_calculator.js", "empty.js"],
+            "resources": ["browser-polyfill.js", "script.js", "preloadScript.js", "empty.js"],
             "matches": ["<all_urls>"]
         }
     ],
