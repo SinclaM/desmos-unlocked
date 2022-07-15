@@ -27,7 +27,7 @@ browser.runtime.onMessage.addListener(async function (request) {
             console.log(`preload_content heard message: ${request.message}`);
             await new Promise<void>(function (resolve) {
                 const script = document.createElement('script');
-                script.src = browser.runtime.getURL('preloadInject.js');
+                script.src = browser.runtime.getURL('preloadScript.js');
                 script.onload = function () {
                     (this as any).remove();
                     resolve();
