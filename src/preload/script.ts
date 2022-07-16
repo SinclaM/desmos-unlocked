@@ -18,11 +18,21 @@ newDefine.amd = {
     jQuery: true,
 };
 
-window.ALMOND_OVERRIDES = new Proxy(window.ALMOND_OVERRIDES ? window.ALMOND_OVERRIDES : {}, {
+// If ALMOND_OVERRIDES is already defined, DesModder must be enabled.
+const isDesmodderActive: boolean = window.ALMOND_OVERRIDES;
+
+
+// Layer a proxy over DesModder's ALMOND_OVERRIDES proxy, if it's enabled.
+window.ALMOND_OVERRIDES = new Proxy(isDesmodderActive ? window.ALMOND_OVERRIDES : {}, {
     get(target, prop, receiver) {
-        console.log('ALMOND_OVERRIDES proxy success');
         if (prop === 'define') {
-            oldDefine = window.define;
+            console.log('ALMOND_OVERRIDES proxy success');
+
+            // If DesModder is enabled, we have to make sure to forward the operation
+            // to DesModder's own ALMOND_OVERRIDES proxy. If we use ALMOND_OVERRIDES.define,
+            // we'll get infinite recursion. And if we just use window.define, then we'll
+            // overwrite DesModder's module overrides.
+            oldDefine = isDesmodderActive ? Reflect.get(target, prop, receiver) : window.define;
             return newDefine;
         } else {
             return Reflect.get(target, prop, receiver);
