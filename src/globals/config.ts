@@ -1,3 +1,3 @@
 export interface MathQuillConfig {
-    autoCommands: string;
+    autoCommands?: string;
 }

@@ -6,24 +6,28 @@ import { MathQuillConfig } from "./globals/config";
 // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Sharing_objects_with_page_scripts#cloneinto
 declare const cloneInto: ((toClone: MathQuillConfig, context: any) => MathQuillConfig) | undefined;
 
-async function updateAutoCommands() {
-    const commands = await browser.storage.local.get("autoCommands");
+async function updateConfig(changes?: browser.storage.ChangeDict) {
+    let config: MathQuillConfig;
+    if (typeof changes === "undefined") {
+        config = await browser.storage.local.get(["autoCommands"]);
+    } else {
+        config = {};
+        Object.keys(changes).forEach((configOption) => (config[configOption] = changes[configOption].newValue));
+    }
+
     const script = document.createElement("script");
     script.src = browser.runtime.getURL("script.js");
-    const cmdString = commands.autoCommands.toString();
     script.onload = function () {
-        const data = cmdString;
-        let config: MathQuillConfig;
+        // TODO: This syntax is a bit rough. Clean up.
         try {
-            config = cloneInto!({ autoCommands: data }, window);
-        } catch {
-            config = { autoCommands: data };
+            config = cloneInto!(config, window);
+        } finally {
+            document.dispatchEvent(new CustomEvent("send-config", { detail: config }));
+            script.remove();
         }
-        document.dispatchEvent(new CustomEvent("send-config", { detail: config }));
-        script.remove();
     };
     (document.head || document.documentElement).appendChild(script);
 }
 
-updateAutoCommands();
-browser.storage.onChanged.addListener(updateAutoCommands);
+updateConfig();
+browser.storage.onChanged.addListener(updateConfig);

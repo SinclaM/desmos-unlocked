@@ -7,7 +7,6 @@ import { MathQuillConfig } from "./globals/config";
 const handler = (({ detail }: CustomEvent<MathQuillConfig>) => {
     // Have to wait for all the preload modifications to finish
     pollForValue(() => window.Desmos?.MathQuill?.config).then(() => {
-        console.log(detail);
         window.Desmos.MathQuill.config({
             autoCommands: detail.autoCommands,
         });
