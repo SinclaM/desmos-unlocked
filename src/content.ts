@@ -18,13 +18,11 @@ async function updateConfig(changes?: browser.storage.ChangeDict) {
     const script = document.createElement("script");
     script.src = browser.runtime.getURL("script.js");
     script.onload = function () {
-        // TODO: This syntax is a bit rough. Clean up.
         try {
             config = cloneInto!(config, window);
-        } finally {
-            document.dispatchEvent(new CustomEvent("send-config", { detail: config }));
-            script.remove();
-        }
+        } catch (e) { /* Just need to catch the ReferenceError if on a nonsupporting browser */ }
+        document.dispatchEvent(new CustomEvent("send-config", { detail: config }));
+        script.remove();
     };
     (document.head || document.documentElement).appendChild(script);
 }
