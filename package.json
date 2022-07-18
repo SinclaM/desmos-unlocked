@@ -57,6 +57,7 @@
         "webpack-merge": "5.7.3"
     },
     "dependencies": {
+        "git-hooks-plus": "^1.0.1",
         "ts-loader": "^9.3.1"
     }
 }
