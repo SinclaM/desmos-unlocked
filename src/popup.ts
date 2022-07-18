@@ -22,22 +22,13 @@ setToDesmosDefault.onclick = function () {
     );
 };
 
-// Log changes to storage for testing
-// browser.storage.onChanged.addListener(function (changes, namespace) {
-//     for (const [key, { oldValue, newValue }] of Object.entries(changes)) {
-//         console.log(
-//             `Storage key '${key}' in namespace '${namespace}' changed.`,
-//             `Old value was '${oldValue}', new value is '${newValue}'.`
-//         );
-//     }
-// });
-
 // Add all the dynamically loaded nodes to the DOM using templates and give
 // sliders their funcionality
 async function initialize() {
-    await populateGrid("grid-item-template", "desmos-default", desmosDefualtAutoCommands);
-    await populateGrid("grid-item-template", "basic", basicAutoCommands);
-    await populateGrid("grid-item-template", "advanced", advancedAutoCommands);
+    const { autoCommands }: { autoCommands: string } = await browser.storage.local.get("autoCommands");
+    populateGrid("grid-item-template", "desmos-default", desmosDefualtAutoCommands, autoCommands);
+    populateGrid("grid-item-template", "basic", basicAutoCommands, autoCommands);
+    populateGrid("grid-item-template", "advanced", advancedAutoCommands, autoCommands);
 
     // Make the sliders actually update user configs when clicked
     document.querySelectorAll(".latex-item").forEach(function (item) {
