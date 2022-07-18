@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "priority": 1,
+        "action": {
+            "type": "redirect",
+            "redirect": { "extensionPath": "/empty.js" }
+        },
+        "condition": {
+            "urlFilter": "https://www.desmos.com/assets/build/calculator_desktop-*.js|"
+        }
+    },
+    {
+        "id": 2,
+        "priority": 2,
+        "action": {
+            "type": "redirect",
+            "redirect": { "extensionPath": "/empty.js" }
+        },
+        "condition": {
+            "urlFilter": "https://www.desmos.com/assets/build/calculator_desktop-*.js?|"
+        }
+    }
+]

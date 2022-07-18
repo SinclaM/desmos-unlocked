@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.9em;
     width: 360px;
     height: 600px;
@@ -50,7 +50,7 @@ button {
     color: rgba(0, 0, 0, 0.85);
     cursor: pointer;
     display: inline-flex;
-    font-family: system-ui, -apple-system, system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
     font-weight: 600;
     justify-content: center;
@@ -121,12 +121,12 @@ h2 {
 }
 
 .symbol {
-    font-family: 'Noto Sans Math', sans-serif;
+    font-family: "Noto Sans Math", sans-serif;
 }
 
 .shortcut {
     display: inline;
-    font-family: 'Fira Code', monospace;
+    font-family: "Fira Code", monospace;
 }
 
 .onoffswitch {
@@ -171,13 +171,13 @@ h2 {
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-    content: '';
+    content: "";
     padding-left: 10px;
     background-color: #0094ff;
     color: #ffffff;
 }
 .onoffswitch-inner:after {
-    content: '';
+    content: "";
     padding-right: 10px;
     background-color: #eeeeee;
     color: #999999;
@@ -201,4 +201,8 @@ h2 {
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px;
+}
+
+.latex-item#mathrm .symbol {
+    font-family: "Times New Roman", Times, serif;
 }
