@@ -29,7 +29,7 @@ module.exports = {
         ],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
-        "no-console": process.env.NODE_ENV === "prod" ? "error" : "warn",
+        "no-console": "warn",
         "no-constant-condition": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-inferrable-types": "off",

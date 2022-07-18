@@ -20,12 +20,9 @@ browser.webRequest.onBeforeRequest.addListener(
         const tabs = await browser.tabs.query({ active: true, currentWindow: true });
 
         if (url.endsWith(".js")) {
-            console.log(url);
             const isDesmodderActive: boolean | void = await browser.tabs.sendMessage(tabs[0].id, {
                 message: "check-desmodder",
             });
-            console.log("Message from the content script:");
-            console.log(isDesmodderActive);
 
             // If DesModder is not active, then we should immediately inject the preload script
             // and begin overrides. There won't be another opportunity.

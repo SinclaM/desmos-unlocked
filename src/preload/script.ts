@@ -25,8 +25,6 @@ const isDesmodderActive: boolean = window.ALMOND_OVERRIDES;
 window.ALMOND_OVERRIDES = new Proxy(isDesmodderActive ? window.ALMOND_OVERRIDES : {}, {
     get(target, prop, receiver) {
         if (prop === "define") {
-            console.log("ALMOND_OVERRIDES proxy success");
-
             // If DesModder is enabled, we have to make sure to forward the operation
             // to DesModder's own ALMOND_OVERRIDES proxy. If we use ALMOND_OVERRIDES.define,
             // we'll get infinite recursion. And if we just use window.define, then we'll
@@ -77,7 +75,6 @@ if (document.currentScript.getAttribute("run-calculator")) {
   Now we load it, but with '??' appended to prevent the web request rules from blocking it */
         const script = document.createElement("script");
         script.src = src + "??";
-        console.log(src);
         script.async = false;
         script.onload = () => {
             // remove from DOM

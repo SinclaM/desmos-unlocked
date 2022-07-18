@@ -14,7 +14,6 @@ chrome.runtime.onInstalled.addListener(function () {
 // initialize the calculator.
 chrome.webRequest.onBeforeRedirect.addListener(
     async function ({ url }) {
-        console.log(url.endsWith("?"));
         const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
         while (true) {
             // The request to calculator_desktop (and the following redirect) may happen
