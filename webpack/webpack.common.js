@@ -1,10 +1,10 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const { merge } = require('webpack-merge');
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+const { merge } = require("webpack-merge");
 
 const browser = process.env.BROWSER;
-const BUILD_DIR_NAME = 'dist';
-const SRC_DIR_NAME = 'src';
+const BUILD_DIR_NAME = "dist";
+const SRC_DIR_NAME = "src";
 
 baseConfig = {
     entry: {
@@ -17,33 +17,33 @@ baseConfig = {
     },
     output: {
         path: path.join(__dirname, `../${BUILD_DIR_NAME}`),
-        filename: '[name].js',
+        filename: "[name].js",
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'ts-loader',
+                use: "ts-loader",
                 exclude: /node_modules/,
             },
         ],
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
+        extensions: [".ts", ".tsx", ".js"],
     },
     plugins: [
         new CopyPlugin({
             patterns: [
-                { from: './images', to: `../${BUILD_DIR_NAME}/images`, context: 'public' },
-                { from: './popup.html', to: `../${BUILD_DIR_NAME}/popup.html`, context: 'public' },
-                { from: './popup.css', to: `../${BUILD_DIR_NAME}/popup.css`, context: 'public' },
-                { from: `${browser}_manifest.json`, to: `../${BUILD_DIR_NAME}/manifest.json`, context: 'public' },
+                { from: "./images", to: `../${BUILD_DIR_NAME}/images`, context: "public" },
+                { from: "./popup.html", to: `../${BUILD_DIR_NAME}/popup.html`, context: "public" },
+                { from: "./popup.css", to: `../${BUILD_DIR_NAME}/popup.css`, context: "public" },
+                { from: `${browser}_manifest.json`, to: `../${BUILD_DIR_NAME}/manifest.json`, context: "public" },
             ],
         }),
     ],
 };
 
-if (browser === 'firefox') {
+if (browser === "firefox") {
     module.exports = baseConfig;
 } else {
     module.exports = merge(baseConfig, {
@@ -54,14 +54,14 @@ if (browser === 'firefox') {
             new CopyPlugin({
                 patterns: [
                     {
-                        from: 'net_request_rules.json',
+                        from: "net_request_rules.json",
                         to: `../${BUILD_DIR_NAME}/net_request_rules.json`,
-                        context: 'public',
+                        context: "public",
                     },
                     {
-                        from: '../node_modules/webextension-polyfill/dist/browser-polyfill.js',
+                        from: "../node_modules/webextension-polyfill/dist/browser-polyfill.js",
                         to: `../${BUILD_DIR_NAME}/browser-polyfill.js`,
-                        context: 'public',
+                        context: "public",
                     },
                 ],
             }),

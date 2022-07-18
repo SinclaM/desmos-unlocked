@@ -1,6 +1,6 @@
 /// <reference types="web-ext-types"/>
-import { pollForValue } from './utils/utils';
-import window from './globals/window';
+import { pollForValue } from "./utils/utils";
+import window from "./globals/window";
 
 const handler = (({ detail }: CustomEvent<string>) => {
     // Have to wait for all the preload modifications to finish
@@ -8,8 +8,8 @@ const handler = (({ detail }: CustomEvent<string>) => {
         (window as any).Desmos.MathQuill.config({
             autoCommands: detail,
         });
-        document.removeEventListener('send-config', handler);
+        document.removeEventListener("send-config", handler);
     });
 }) as EventListener;
 
-document.addEventListener('send-config', handler);
+document.addEventListener("send-config", handler);

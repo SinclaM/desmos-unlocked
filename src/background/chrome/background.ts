@@ -5,7 +5,7 @@ chrome.runtime.onInstalled.addListener(function () {
         // keepmeKEEPME should always remain in autoCommands, since MathQuill requires a nonempty
         // space-delimited list of commands.
         autoCommands:
-            'keepmeKEEPME alpha beta sqrt theta Theta phi Phi pi Pi tau nthroot cbrt sum prod int ans percent infinity infty gamma Gamma delta Delta epsilon epsiv zeta eta kappa lambda Lambda mu xi Xi rho sigma Sigma chi Psi omega Omega digamma iota nu upsilon Upsilon Psi square mid parallel nparallel perp to times div approx',
+            "keepmeKEEPME alpha beta sqrt theta Theta phi Phi pi Pi tau nthroot cbrt sum prod int ans percent infinity infty gamma Gamma delta Delta epsilon epsiv zeta eta kappa lambda Lambda mu xi Xi rho sigma Sigma chi Psi omega Omega digamma iota nu upsilon Upsilon Psi square mid parallel nparallel perp to times div approx",
     });
 });
 
@@ -14,7 +14,7 @@ chrome.runtime.onInstalled.addListener(function () {
 // initialize the calculator.
 chrome.webRequest.onBeforeRedirect.addListener(
     async function ({ url }) {
-        console.log(url.endsWith('?'));
+        console.log(url.endsWith("?"));
         const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
         while (true) {
             // The request to calculator_desktop (and the following redirect) may happen
@@ -25,18 +25,17 @@ chrome.webRequest.onBeforeRedirect.addListener(
                 // TODO: Figure out why tsserver thinks that sendMessage returns void and not
                 // a promise. tsserver says await has no effect on the expression below but it's
                 // actual critical to resolve the promise and catch the error.
-                await chrome.tabs.sendMessage(tabs[0].id, { message: 'redirect-detected', url: url });
+                await chrome.tabs.sendMessage(tabs[0].id, { message: "redirect-detected", url: url });
                 break;
-            }
-            catch {
+            } catch {
                 await new Promise((r) => setTimeout(r, 10));
             }
         }
     },
     {
         urls: [
-            'https://www.desmos.com/assets/build/calculator_desktop-*.js',
-            'https://www.desmos.com/assets/build/calculator_desktop-*.js?',
+            "https://www.desmos.com/assets/build/calculator_desktop-*.js",
+            "https://www.desmos.com/assets/build/calculator_desktop-*.js?",
         ],
     }
 );

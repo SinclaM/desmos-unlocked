@@ -18,7 +18,7 @@
     "ignorePatterns": ["dist/*", "webpack/*"],
     "rules": {
         "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "single"],
+        "quotes": ["error", "double"],
         "semi": ["error", "always"],
         "eol-last": ["error", "always"],
         "import/newline-after-import": [

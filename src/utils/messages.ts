@@ -12,54 +12,54 @@ Post message conventions:
 
 type MessageWindowToContent =
     | {
-          type: 'enable-script';
+          type: "enable-script";
           scriptName: string;
       }
     | {
-          type: 'set-plugins-enabled';
+          type: "set-plugins-enabled";
           value: { [id: string]: boolean };
       }
     | {
-          type: 'set-plugin-settings';
+          type: "set-plugin-settings";
           value: { [id: string]: any };
       }
     | {
-          type: 'get-initial-data';
+          type: "get-initial-data";
       }
     | {
-          type: 'get-preload-enabled';
+          type: "get-preload-enabled";
       }
     | {
-          type: 'get-script-url';
+          type: "get-script-url";
       }
     | {
-          type: 'get-worker-append-url';
+          type: "get-worker-append-url";
       };
 
 type MessageContentToWindow =
     | {
-          type: 'apply-preload-enabled';
+          type: "apply-preload-enabled";
           value: { [key: string]: boolean };
       }
     | {
-          type: 'apply-plugins-enabled';
+          type: "apply-plugins-enabled";
           value: { [key: string]: boolean };
       }
     | {
-          type: 'apply-plugin-settings';
+          type: "apply-plugin-settings";
           value: { [id: string]: { [key: string]: boolean } };
       }
     | {
-          type: 'set-script-url';
+          type: "set-script-url";
           value: string;
       }
     | {
-          type: 'set-worker-append-url';
+          type: "set-worker-append-url";
           value: string;
       };
 
 function postMessage<T extends { type: string }>(message: T) {
-    window.postMessage(message, '*');
+    window.postMessage(message, "*");
 }
 
 export function postMessageUp(message: MessageWindowToContent) {
@@ -80,10 +80,10 @@ function listenToMessage<T>(callback: (message: T) => ShouldCancel) {
         }
         const cancel = callback(event.data);
         if (cancel) {
-            window.removeEventListener('message', wrappedCallback, false);
+            window.removeEventListener("message", wrappedCallback, false);
         }
     };
-    window.addEventListener('message', wrappedCallback, false);
+    window.addEventListener("message", wrappedCallback, false);
     return wrappedCallback;
 }
 
