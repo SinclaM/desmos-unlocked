@@ -20,7 +20,9 @@ async function updateConfig(changes?: browser.storage.ChangeDict) {
     script.onload = function () {
         try {
             config = cloneInto!(config, window);
-        } catch (e) { /* Just need to catch the ReferenceError if on a nonsupporting browser */ }
+        } catch (e) {
+            /* Just need to catch the ReferenceError if on a nonsupporting browser */
+        }
         document.dispatchEvent(new CustomEvent("send-config", { detail: config }));
         script.remove();
     };
