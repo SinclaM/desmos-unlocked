@@ -3,7 +3,6 @@ import { pollForValue } from "./utils/utils";
 import window from "./globals/window";
 import { MathQuillConfig } from "./globals/config";
 
-
 const handler = (({ detail }: CustomEvent<MathQuillConfig>) => {
     // Have to wait for all the preload modifications to finish
     pollForValue(() => window.Desmos?.MathQuill?.config).then(() => {

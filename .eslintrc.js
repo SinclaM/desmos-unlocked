@@ -1,36 +1,36 @@
-{
-    "env": {
-        "browser": true,
-        "es2021": true
+module.exports = {
+    env: {
+        browser: true,
+        es2021: true,
     },
-    "extends": [
+    extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:import/errors",
-        "plugin:import/warnings"
+        "plugin:import/warnings",
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 12,
-        "sourceType": "module"
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+        ecmaVersion: 12,
+        sourceType: "module",
     },
-    "plugins": ["@typescript-eslint", "import"],
-    "ignorePatterns": ["dist/*", "webpack/*"],
-    "rules": {
+    plugins: ["@typescript-eslint", "import"],
+    ignorePatterns: ["dist/*", "webpack/*", ".eslintrc.js"],
+    rules: {
         "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "double"],
-        "semi": ["error", "always"],
+        quotes: ["error", "double"],
+        semi: ["error", "always"],
         "eol-last": ["error", "always"],
         "import/newline-after-import": [
             "error",
             {
-                "count": 1
-            }
+                count: 1,
+            },
         ],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
-        "no-console": 1,
-        "no-constant-condition": 1,
+        "no-console": process.env.NODE_ENV === "prod" ? "error" : "warn",
+        "no-constant-condition": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-unused-vars": "error",
@@ -39,17 +39,17 @@
         "@typescript-eslint/ban-types": [
             "off",
             {
-                "types": {
-                    "Function": ""
-                }
-            }
-        ]
+                types: {
+                    Function: "",
+                },
+            },
+        ],
     },
-    "settings": {
+    settings: {
         "import/resolver": {
-            "node": {
-                "extensions": [".js", ".jsx", ".ts", ".tsx"]
-            }
-        }
-    }
-}
+            node: {
+                extensions: [".js", ".jsx", ".ts", ".tsx"],
+            },
+        },
+    },
+};

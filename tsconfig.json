@@ -1,19 +1,18 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "sourceMap": true,
-    "strictNullChecks": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react",
-    "jsxFactory": "DCGView.jsx",
-    "target": "es6",
-    "allowJs": true,
-    "strict": true,
-    "baseUrl": "src",
-    "noImplicitAny": false
-  },
-  "include": ["./src/"]
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "strictNullChecks": false,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react",
+        "jsxFactory": "DCGView.jsx",
+        "target": "es6",
+        "allowJs": true,
+        "strict": true,
+        "baseUrl": "src",
+        "noImplicitAny": false
+    },
+    "include": ["./src/"]
 }
-
