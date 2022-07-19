@@ -9,7 +9,11 @@ declare const cloneInto: ((toClone: MathQuillConfig, context: any) => MathQuillC
 async function updateConfig(changes?: browser.storage.ChangeDict) {
     let config: MathQuillConfig;
     if (typeof changes === "undefined") {
-        config = await browser.storage.local.get(["autoCommands", "charsThatBreakOutOfSupSub"]);
+        config = await browser.storage.local.get([
+            "autoCommands",
+            "charsThatBreakOutOfSupSub",
+            "autoParenthesizeFunctions",
+        ]);
     } else {
         config = {};
         Object.keys(changes).forEach((configOption) => (config[configOption] = changes[configOption].newValue));
