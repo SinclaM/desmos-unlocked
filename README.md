@@ -1,7 +1,7 @@
 <div align="center">
 
 <p>
-	<img  src="public/images/logo/128.png">
+	<img  width="128" src="https://user-images.githubusercontent.com/82351204/179812535-eb396fdb-2ea3-47c1-999e-940af41f2cd5.png">
 </p>
 <h1>Desmos Unlocked</h1>
 
