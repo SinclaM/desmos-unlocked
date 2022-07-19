@@ -1,6 +1,6 @@
 {
     "name": "desmos-unlocked",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Browser extension for better user control of the Desmos graphing calculator configuration ",
     "main": "background.js",
     "scripts": {
@@ -9,13 +9,13 @@
         "code:prettier": "prettier --write '**/**/*.{ts,js,html,css,json}'",
         "code:check": "./node_modules/.bin/tsc --noEmit && prettier --check '**/**/*.{ts,js,html,css,json}' && eslint '**/**/*.ts'",
         "app:chrome": "rimraf dist && cross-env BROWSER='chrome' webpack --config webpack/webpack.prod.js",
-        "app:chrome-dev": "cross-env BROWSER='chrome' webpack --config webpack/webpack.dev.js --watch",
+        "app:chrome-dev": "rimraf dist && cross-env BROWSER='chrome' webpack --config webpack/webpack.dev.js --watch",
         "app:edge": "rimraf dist && cross-env BROWSER='edge' webpack --config webpack/webpack.prod.js",
-        "app:edge-dev": "cross-env BROWSER='edge' webpack --config webpack/webpack.dev.js --watch",
+        "app:edge-dev": "rimraf dist && cross-env BROWSER='edge' webpack --config webpack/webpack.dev.js --watch",
         "app:opera": "rimraf dist && cross-env BROWSER='opera' webpack --config webpack/webpack.prod.js",
-        "app:opera-dev": "cross-env BROWSER='opera' webpack --config webpack/webpack.dev.js --watch",
+        "app:opera-dev": "rimraf dist && cross-env BROWSER='opera' webpack --config webpack/webpack.dev.js --watch",
         "app:firefox": "rimraf dist && cross-env BROWSER='firefox' webpack --config webpack/webpack.prod.js",
-        "app:firefox-dev": "cross-env BROWSER='firefox' webpack --config webpack/webpack.dev.js --watch"
+        "app:firefox-dev": "rimraf dist && cross-env BROWSER='firefox' webpack --config webpack/webpack.dev.js --watch"
     },
     "repository": {
         "type": "git",
