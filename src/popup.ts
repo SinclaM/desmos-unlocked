@@ -2,27 +2,6 @@ import { desmosDefualtAutoCommands, basicAutoCommands, advancedAutoCommands } fr
 import { massSet, storeConfig, populateGrid } from "./utils/utils";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const setToDefault = document.getElementById("set-to-default");
-    const setToDesmosDefault = document.getElementById("set-to-desmos-default");
-
-    setToDefault.onclick = function () {
-        massSet(
-            Array.from(document.querySelectorAll("#desmos-default .latex-item, #basic .latex-item"))
-                .map((item) => item.id)
-                .filter(function (item) {
-                    return item !== "ge" && item !== "le" && item !== "ne" && item !== "pm" && item !== "mp";
-                }),
-            "autoCommands"
-        );
-    };
-
-    setToDesmosDefault.onclick = function () {
-        massSet(
-            Array.from(document.querySelectorAll("#desmos-default .latex-item")).map((item) => item.id),
-            "autoCommands"
-        );
-    };
-
     const breakoutChars = document.querySelector<HTMLInputElement>("#breakout textarea");
     const setChars = document.getElementById("set-chars");
 
@@ -56,6 +35,41 @@ document.addEventListener("DOMContentLoaded", async () => {
         // (disableAutoSubstitutionInSubscripts === true means shortcuts disabled).
         subscriptShortcuts.checked = !stored.disableAutoSubstitutionInSubscripts as boolean;
     });
+
+    const setToDefault = document.getElementById("set-to-default");
+    const setToDesmosDefault = document.getElementById("set-to-desmos-default");
+
+    const setToDefaultCommon = () => {
+        if (autoParen.checked) {
+            autoParen.click();
+        }
+        if (subscriptShortcuts.checked) {
+            subscriptShortcuts.click();
+        }
+        breakoutChars.value = "+-=<>*";
+        setChars.click();
+
+    };
+
+    setToDefault.onclick = function () {
+        massSet(
+            Array.from(document.querySelectorAll("#desmos-default .latex-item, #basic .latex-item"))
+                .map((item) => item.id)
+                .filter(function (item) {
+                    return item !== "ge" && item !== "le" && item !== "ne" && item !== "pm" && item !== "mp";
+                }),
+            "autoCommands"
+        );
+        setToDefaultCommon();
+    };
+
+    setToDesmosDefault.onclick = function () {
+        massSet(
+            Array.from(document.querySelectorAll("#desmos-default .latex-item")).map((item) => item.id),
+            "autoCommands"
+        );
+        setToDefaultCommon();
+    };
 
     // Add all the dynamically loaded nodes to the DOM using templates and give
     // sliders their funcionality
