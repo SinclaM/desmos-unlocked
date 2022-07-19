@@ -3,6 +3,12 @@ import { massSet, storeConfig, populateGrid } from "./utils/utils";
 
 const setToDefault = document.getElementById("set-to-default");
 const setToDesmosDefault = document.getElementById("set-to-desmos-default");
+const breakoutChars = document.querySelector<HTMLInputElement>("#breakout textarea");
+const setChars = document.getElementById("set-chars");
+
+browser.storage.local
+    .get("charsThatBreakOutOfSupSub")
+    .then((stored) => (breakoutChars.value = stored.charsThatBreakOutOfSupSub.toString()));
 
 setToDefault.onclick = function () {
     massSet(
@@ -20,6 +26,10 @@ setToDesmosDefault.onclick = function () {
         Array.from(document.querySelectorAll("#desmos-default .latex-item")).map((item) => item.id),
         "autoCommands"
     );
+};
+
+setChars.onclick = function () {
+    browser.storage.local.set({ charsThatBreakOutOfSupSub: breakoutChars.value });
 };
 
 // Add all the dynamically loaded nodes to the DOM using templates and give

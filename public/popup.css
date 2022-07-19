@@ -206,3 +206,22 @@ h2 {
 .latex-item#mathrm .symbol {
     font-family: "Times New Roman", Times, serif;
 }
+
+#breakout {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#breakout textarea {
+    flex-grow: 0.5;
+    height: 1.5em;
+    resize: none;
+    font-size: 1.4em;
+}
+
+#set-chars {
+    min-height: 0;
+    height: 0.8em;
+}
+
