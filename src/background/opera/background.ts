@@ -1,7 +1,7 @@
-/// <reference types="web-ext-types"/>
+/// <reference types="chrome"/>
 
-browser.runtime.onInstalled.addListener(function () {
-    browser.storage.local.set({
+chrome.runtime.onInstalled.addListener(function () {
+    chrome.storage.local.set({
         // keepmeKEEPME should always remain in autoCommands, since MathQuill requires a nonempty
         // space-delimited list of commands.
         autoCommands:
@@ -9,35 +9,26 @@ browser.runtime.onInstalled.addListener(function () {
     });
 });
 
-browser.webRequest.onBeforeRequest.addListener(
+// Listen for redirects from the a request to calculator_desktop. When this redirect happens,
+// we want to send a message to the preload content script to begin module overrides and
+// initialize the calculator.
+chrome.webRequest.onBeforeRedirect.addListener(
     async function ({ url }) {
-        // This url is used by preload_content to check for DesModder activity.
-        // We ignore it here to avoid an infinite recursion.
-        if (url === "https://www.desmos.com/assets/build/calculator_desktop-this_does_not_exist.js") {
-            return;
-        }
-
-        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-
-        if (url.endsWith(".js")) {
-            const isDesmodderActive: boolean | void = await browser.tabs.sendMessage(tabs[0].id, {
-                message: "check-desmodder",
-            });
-
-            // If DesModder is not active, then we should immediately inject the preload script
-            // and begin overrides. There won't be another opportunity.
-            // If DesModder is active, then we know that DesModder's own webRequest rules will
-            // block this script anyway, and we don't want to define ALMOND_OVERRIDES before
-            // DesModder does, so we can wait until DesModder makes another request.
-            if (!isDesmodderActive) {
-                await browser.tabs.sendMessage(tabs[0].id, { message: "inject-preload" });
+        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+        while (true) {
+            // The request to calculator_desktop (and the following redirect) may happen
+            // before preload_content is loaded at document_start. To avoid a race condition,
+            // we keep trying to send the message until the "no receiving end" exception
+            // is gone.
+            try {
+                // TODO: Figure out why tsserver thinks that sendMessage returns void and not
+                // a promise. tsserver says await has no effect on the expression below but it's
+                // actual critical to resolve the promise and catch the error.
+                await chrome.tabs.sendMessage(tabs[0].id, { message: "redirect-detected", url: url });
+                break;
+            } catch {
+                await new Promise((r) => setTimeout(r, 10));
             }
-        }
-
-        // This url being requested means DesModder is active and trying to load the calculator.
-        // Now is the time to inject the preload.
-        if (url.endsWith(".js?")) {
-            await browser.tabs.sendMessage(tabs[0].id, { message: "inject-preload" });
         }
     },
     {
@@ -45,6 +36,5 @@ browser.webRequest.onBeforeRequest.addListener(
             "https://www.desmos.com/assets/build/calculator_desktop-*.js",
             "https://www.desmos.com/assets/build/calculator_desktop-*.js?",
         ],
-    },
-    ["blocking"]
+    }
 );
