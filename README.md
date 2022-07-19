@@ -21,7 +21,6 @@ more advanced mathematical symbols.
 Support for the following features planned:
 * A couple more Greek letters (`varrho`, `varpi`, `varepsilon`, `varphi`, `varkappa`, and `varsigma`), which currently conflict with the builtin `var` shortcut.
 * Auto parenthesizing functions like `sin`, `log`, etc.
-* Customizing which operators (`+`, `-`, `*`, etc.) will bring the cursor out of a superscript or subscript.
 * Enabling shortucts in superscripts and subscripts.
 
 ## Download links
