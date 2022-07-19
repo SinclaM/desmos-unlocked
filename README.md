@@ -1,6 +1,16 @@
-<img align="left" src="public/images/logo/128.png">
+<div align="center">
 
-# Desmos Unlocked
+<p>
+	<img  src="public/images/logo/128.png">
+</p>
+<h1>Desmos Unlocked</h1>
+
+[![Chrome Web Store][WebStoreBadge]][WebStore]
+[![Addons.mozilla.org][AmoBadge]][Amo]
+[![Microsoft Edge Addons][EdgeBadge]][Edge]
+
+</div>
+
 Write beautiful equations in the Desmos graphing calculator by customizing the underlying math formula editor
 from an easy-to-use control panel.
 
@@ -55,3 +65,13 @@ Once `npm` has finished installing dependencies, run:
 to build for Firefox, Chrome, Microsoft Edge, or Opera, respectively.
 
 The built code will be located in the `dist` directory.
+
+<!-- Badges -->
+[AmoBadge]: https://img.shields.io/amo/v/%7B43359c03-2c83-4d28-8982-00e011b097ee%7D?label=Firefox&logo=Firefox&logoColor=%23FFFFFF
+[EdgeBadge]: https://img.shields.io/badge/dynamic/json?label=Edge&logo=microsoft-edge&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Flojelmbmlhfakfgnngkmmfhjbianabgh
+[WebStoreBadge]: https://img.shields.io/chrome-web-store/v/mgkcmbkophlnagckoodcmaeofginaokm?label=Chrome&logo=Google%20Chrome&logoColor=%23FFFFFF
+
+<!-- Download -->
+[Amo]: https://addons.mozilla.org/en-US/firefox/addon/desmos-unlocked/
+[Edge]: https://microsoftedge.microsoft.com/addons/detail/desmos-unlocked/lojelmbmlhfakfgnngkmmfhjbianabgh
+[WebStore]: https://chrome.google.com/webstore/detail/desmos-unlocked/mgkcmbkophlnagckoodcmaeofginaokm
