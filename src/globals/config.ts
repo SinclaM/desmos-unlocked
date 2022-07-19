@@ -3,4 +3,5 @@ export interface MathQuillConfig {
     charsThatBreakOutOfSupSub?: string;
     isAutoParenEnabled?: boolean;
     autoParenthesizedFunctions?: string;
+    disableAutoSubstitutionInSubscripts?: string;
 }

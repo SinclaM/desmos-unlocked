@@ -13,6 +13,7 @@ async function updateConfig(changes?: browser.storage.ChangeDict) {
             "autoCommands",
             "charsThatBreakOutOfSupSub",
             "isAutoParenEnabled",
+            "disableAutoSubstitutionInSubscripts"
         ]);
     } else {
         config = {};

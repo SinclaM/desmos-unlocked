@@ -43,6 +43,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         autoParen.checked = stored.isAutoParenEnabled as boolean;
     });
 
+    const subscriptShortcuts = document.querySelector<HTMLInputElement>(
+        "#shortcuts-in-subscripts .onoffswitch .onoffswitch-checkbox"
+    );
+    subscriptShortcuts.addEventListener("click", async () => {
+        const stored = await browser.storage.local.get("disableAutoSubstitutionInSubscripts");
+        browser.storage.local.set({ disableAutoSubstitutionInSubscripts: !stored.disableAutoSubstitutionInSubscripts });
+    });
+    browser.storage.local.get("disableAutoSubstitutionInSubscripts").then((stored) => {
+        // Note that in the UI we represent the option as "Enable shortcuts in subscripts"
+        // (toggle on means shortcuts enabled), while the MathQuill API has it reversed
+        // (disableAutoSubstitutionInSubscripts === true means shortcuts disabled).
+        subscriptShortcuts.checked = !stored.disableAutoSubstitutionInSubscripts as boolean;
+    });
+
     // Add all the dynamically loaded nodes to the DOM using templates and give
     // sliders their funcionality
     const { autoCommands }: { autoCommands: string } = await browser.storage.local.get("autoCommands");
