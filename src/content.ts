@@ -12,7 +12,7 @@ async function updateConfig(changes?: browser.storage.ChangeDict) {
         config = await browser.storage.local.get([
             "autoCommands",
             "charsThatBreakOutOfSupSub",
-            "autoParenthesizeFunctions",
+            "isAutoParenEnabled",
         ]);
     } else {
         config = {};

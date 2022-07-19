@@ -1,5 +1,6 @@
 export interface MathQuillConfig {
     autoCommands?: string;
     charsThatBreakOutOfSupSub?: string;
-    autoParenthesizeFunctions?: string;
+    isAutoParenEnabled?: boolean;
+    autoParenthesizedFunctions?: string;
 }
