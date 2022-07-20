@@ -62,6 +62,40 @@
             <textarea cols="20" rows="1"></textarea>
             <button id="set-chars">set</button>
         </div>
+        <hr class="thin-line" />
+        <div class="header-toggle" id="auto-paren">
+            <h2>Auto-parenthesize functions</h2>
+            <div class="onoffswitch">
+                <input
+                    type="checkbox"
+                    name="onoffswitch"
+                    class="onoffswitch-checkbox"
+                    id="switch-auto-paren"
+                    tabindex="0"
+                />
+                <label class="onoffswitch-label" for="switch-auto-paren">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+        </div>
+        <hr class="thin-line" />
+        <div class="header-toggle" id="shortcuts-in-subscripts">
+            <h2>Enable shortcuts in subscripts</h2>
+            <div class="onoffswitch">
+                <input
+                    type="checkbox"
+                    name="onoffswitch"
+                    class="onoffswitch-checkbox"
+                    id="switch-shortcuts-in-subscripts"
+                    tabindex="0"
+                />
+                <label class="onoffswitch-label" for="switch-shortcuts-in-subscripts">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+        </div>
         <hr class="thick-line" />
         <script type="application/javascript" src="browser-polyfill.js"></script>
         <script src="popup.js"></script>
