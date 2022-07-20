@@ -1,6 +1,6 @@
 {
     "name": "desmos-unlocked",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Browser extension for better user control of the Desmos graphing calculator configuration ",
     "main": "background.js",
     "scripts": {
