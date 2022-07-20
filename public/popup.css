@@ -224,3 +224,9 @@ h2 {
     min-height: 0;
     height: 0.8em;
 }
+
+.header-toggle {
+    display: grid;
+    grid-template-columns: 260px 100px;
+    align-items: center;
+}
