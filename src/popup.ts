@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         breakoutChars.value = "+-=<>*";
         setChars.click();
-
     };
 
     setToDefault.onclick = function () {
