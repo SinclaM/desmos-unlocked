@@ -213,11 +213,15 @@ h2 {
     align-items: center;
 }
 
+textarea {
+    resize: none;
+    font-size: 1.4em;
+}
+
+
 #breakout textarea {
     flex-grow: 0.5;
     height: 1.5em;
-    resize: none;
-    font-size: 1.4em;
 }
 
 #set-chars {
@@ -229,4 +233,24 @@ h2 {
     display: grid;
     grid-template-columns: 260px 100px;
     align-items: center;
+}
+
+#collapsible {
+    display: none;
+}
+
+#collapsible textarea {
+    grid-row: 1 / span 3;
+}
+
+#collapsible .container {
+    display: grid;
+    grid-template-columns: 65% 30%;
+    grid-template-rows: 3em 3em 3em;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+#collapsible button {
+    padding: 0px;
 }

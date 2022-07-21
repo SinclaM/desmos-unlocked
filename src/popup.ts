@@ -36,6 +36,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         subscriptShortcuts.checked = !stored.disableAutoSubstitutionInSubscripts as boolean;
     });
 
+    const extendSymbols = document.getElementById("switch-extend-mq") as HTMLInputElement;
+    const collapsible = document.getElementById("collapsible");
+    collapsible.style.display = "none";
+    extendSymbols.addEventListener("click", () => {
+        if (collapsible.style.display === "none") {
+            collapsible.style.display = "block";
+        } else {
+            collapsible.style.display = "none";
+        }
+    });
+
     const setToDefault = document.getElementById("set-to-default");
     const setToDesmosDefault = document.getElementById("set-to-desmos-default");
 
