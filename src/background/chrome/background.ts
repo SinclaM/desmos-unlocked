@@ -9,6 +9,7 @@ chrome.runtime.onInstalled.addListener(function () {
         charsThatBreakOutOfSupSub: "+-=<>*",
         isAutoParenEnabled: false,
         disableAutoSubstitutionInSubscripts: true,
+        enableMathquillOverrides: false,
     });
 });
 

@@ -4,4 +4,5 @@ export interface MathQuillConfig {
     isAutoParenEnabled?: boolean;
     autoParenthesizedFunctions?: string;
     disableAutoSubstitutionInSubscripts?: string;
+    enableMathquillOverrides?: boolean;
 }

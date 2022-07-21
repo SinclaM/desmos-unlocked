@@ -90,3 +90,8 @@ export async function storeConfig(this: HTMLInputElement) {
         browser.storage.local.set({ [opt]: newStorage });
     }
 }
+
+export async function toggleConfig(configOption: string) {
+        const stored = await browser.storage.local.get(configOption);
+        browser.storage.local.set({ [configOption]: !stored[configOption] });
+}

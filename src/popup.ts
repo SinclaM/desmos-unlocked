@@ -1,5 +1,5 @@
 import { desmosDefualtAutoCommands, basicAutoCommands, advancedAutoCommands } from "./utils/autoCommands";
-import { massSet, storeConfig, populateGrid } from "./utils/utils";
+import { massSet, storeConfig, populateGrid, toggleConfig } from "./utils/utils";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const breakoutChars = document.querySelector<HTMLInputElement>("#breakout textarea");
@@ -14,10 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     const autoParen = document.querySelector<HTMLInputElement>("#auto-paren .onoffswitch .onoffswitch-checkbox");
-    autoParen.addEventListener("click", async () => {
-        const stored = await browser.storage.local.get("isAutoParenEnabled");
-        browser.storage.local.set({ isAutoParenEnabled: !stored.isAutoParenEnabled });
-    });
+    autoParen.addEventListener("click", () => toggleConfig("isAutoParenEnabled"));
     browser.storage.local.get("isAutoParenEnabled").then((stored) => {
         autoParen.checked = stored.isAutoParenEnabled as boolean;
     });
@@ -25,10 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const subscriptShortcuts = document.querySelector<HTMLInputElement>(
         "#shortcuts-in-subscripts .onoffswitch .onoffswitch-checkbox"
     );
-    subscriptShortcuts.addEventListener("click", async () => {
-        const stored = await browser.storage.local.get("disableAutoSubstitutionInSubscripts");
-        browser.storage.local.set({ disableAutoSubstitutionInSubscripts: !stored.disableAutoSubstitutionInSubscripts });
-    });
+    subscriptShortcuts.addEventListener("click", () => toggleConfig("disableAutoSubstitutionInSubscripts"));
     browser.storage.local.get("disableAutoSubstitutionInSubscripts").then((stored) => {
         // Note that in the UI we represent the option as "Enable shortcuts in subscripts"
         // (toggle on means shortcuts enabled), while the MathQuill API has it reversed
@@ -38,13 +32,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const extendSymbols = document.getElementById("switch-extend-mq") as HTMLInputElement;
     const collapsible = document.getElementById("collapsible");
-    collapsible.style.display = "none";
+
     extendSymbols.addEventListener("click", () => {
-        if (collapsible.style.display === "none") {
-            collapsible.style.display = "block";
-        } else {
-            collapsible.style.display = "none";
-        }
+        toggleConfig("enableMathquillOverrides");
+        collapsible.style.display = collapsible.style.display === "none" ? "block" : "none";
+    });
+
+    browser.storage.local.get("enableMathquillOverrides").then((stored) => {
+        extendSymbols.checked = stored.enableMathquillOverrides as boolean;
+        collapsible.style.display = extendSymbols.checked ? "block" : "none";
     });
 
     const setToDefault = document.getElementById("set-to-default");
@@ -56,6 +52,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         if (subscriptShortcuts.checked) {
             subscriptShortcuts.click();
+        }
+        if (extendSymbols.checked) {
+            extendSymbols.click();
         }
         breakoutChars.value = "+-=<>*";
         setChars.click();
