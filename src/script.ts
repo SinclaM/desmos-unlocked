@@ -27,17 +27,10 @@ const handler = (({ detail }: CustomEvent<MathQuillConfig>) => {
 document.addEventListener("send-config", handler);
 
 function getAutoOperators() {
-    // Get all the autoOperatorNames in the first editable field in the expression
-    // window. Then, filter out the ones that are not only letters, in order to comply
-    // with the MathQuill API. Then return the string of all these names.
-    // Another approach would be use window.require("main/mathquill-operators").getAutoOperators()
-    // and then remove the '|'s included in that string, but those operators returned by the
-    // require are the Desmos defaults. It's possible that someone might override those defaults
-    // (e.g. through DesModder). But then again, someone overriding the defaults might just do
-    // it by overriding the main/mathquill-operators module anyway 🤷.
-    return Object.keys(
-        window.Desmos.MathQuill(document.querySelector(".dcg-mq-editable-field")).__options.autoOperatorNames
-    )
-        .filter((opName) => /^[a-zA-Z]+$/.test(opName))
-        .join(" ");
+    // getAutoOperators will return a string which is almost a space-delimited list of only
+    // letters (as MathQuill expects). Except some functions in this string are followed by a
+    // | and more verbose breakdown of the function. For example, in this string might be
+    // ln|natural-log. The regex filters out the verbose parts and keeps just the function
+    // names.
+    return window.require("main/mathquill-operators").getAutoOperators().replace(/\|[^ ]*/g, "");
 }
