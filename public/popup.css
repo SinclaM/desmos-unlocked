@@ -240,14 +240,16 @@ textarea {
 
 #collapsible .container {
     display: grid;
-    grid-template-columns: 65% 30%;
+    grid-template-columns: 70% 25%;
     grid-template-rows: 3em 3em 3em;
     row-gap: 10px;
     column-gap: 10px;
 }
 
 #collapsible button {
+    height: 20px;
     padding: 0px;
+    align-self: center;
 }
 
 #error-bar {
