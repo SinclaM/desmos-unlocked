@@ -17,8 +17,7 @@ chrome.runtime.onInstalled.addListener(function () {
 // we want to send a message to the preload content script to begin module overrides and
 // initialize the calculator.
 chrome.webRequest.onBeforeRedirect.addListener(
-    async function ({ url }) {
-        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    async function ({ tabId }) {
         while (true) {
             // The request to calculator_desktop (and the following redirect) may happen
             // before preload_content is loaded at document_start. To avoid a race condition,
@@ -28,7 +27,7 @@ chrome.webRequest.onBeforeRedirect.addListener(
                 // TODO: Figure out why tsserver thinks that sendMessage returns void and not
                 // a promise. tsserver says await has no effect on the expression below but it's
                 // actual critical to resolve the promise and catch the error.
-                await chrome.tabs.sendMessage(tabs[0].id, { message: "redirect-detected", url: url });
+                await chrome.tabs.sendMessage(tabId, { message: "redirect-detected" });
                 break;
             } catch {
                 await new Promise((r) => setTimeout(r, 10));
@@ -42,3 +41,51 @@ chrome.webRequest.onBeforeRedirect.addListener(
         ],
     }
 );
+
+chrome.storage.onChanged.addListener((changes) => {
+    if (changes.enableMathquillOverrides?.newValue) {
+        //@ts-ignore
+        chrome.declarativeNetRequest.updateDynamicRules(
+            {
+                addRules: [
+                    {
+                        id: 1,
+                        priority: 1,
+                        action: {
+                            //@ts-ignore
+                            type: "redirect",
+                            redirect: { extensionPath: "/empty.js" },
+                        },
+                        condition: {
+                            urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js|",
+                        },
+                    },
+                    {
+                        id: 2,
+                        priority: 2,
+                        action: {
+                            //@ts-ignore
+                            type: "redirect",
+                            redirect: { extensionPath: "/empty.js" },
+                        },
+                        condition: {
+                            urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js?|",
+                        },
+                    },
+                ],
+            },
+            () => {
+                /* tsserver thinks this callback is required */
+            }
+        );
+    } else {
+        chrome.declarativeNetRequest.updateDynamicRules(
+            {
+                removeRuleIds: [1, 2],
+            },
+            () => {
+                /* tsserver thinks this callback is required */
+            }
+        );
+    }
+});
