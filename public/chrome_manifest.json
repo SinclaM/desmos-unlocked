@@ -2,7 +2,7 @@
     "name": "Desmos Unlocked",
     "version": "1.0.7",
     "description": "Browser extension for better user control of the Desmos graphing calculator configuration",
-    "permissions": ["storage", "declarativeNetRequest", "declarativeNetRequestWithHostAccess", "webRequest"],
+    "permissions": ["storage", "declarativeNetRequestWithHostAccess", "webRequest"],
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"

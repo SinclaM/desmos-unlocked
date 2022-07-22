@@ -43,49 +43,50 @@ chrome.webRequest.onBeforeRedirect.addListener(
 );
 
 chrome.storage.onChanged.addListener((changes) => {
-    if (changes.enableMathquillOverrides?.newValue) {
-        //@ts-ignore
-        chrome.declarativeNetRequest.updateDynamicRules(
-            {
-                addRules: [
-                    {
-                        id: 1,
-                        priority: 1,
-                        action: {
-                            //@ts-ignore
-                            type: "redirect",
-                            redirect: { extensionPath: "/empty.js" },
+    if (typeof changes.enableMathquillOverrides !== "undefined") {
+        if (changes.enableMathquillOverrides.newValue) {
+            chrome.declarativeNetRequest.updateDynamicRules(
+                {
+                    addRules: [
+                        {
+                            id: 1,
+                            priority: 1,
+                            action: {
+                                //@ts-ignore
+                                type: "redirect",
+                                redirect: { extensionPath: "/empty.js" },
+                            },
+                            condition: {
+                                urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js|",
+                            },
                         },
-                        condition: {
-                            urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js|",
+                        {
+                            id: 2,
+                            priority: 2,
+                            action: {
+                                //@ts-ignore
+                                type: "redirect",
+                                redirect: { extensionPath: "/empty.js" },
+                            },
+                            condition: {
+                                urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js?|",
+                            },
                         },
-                    },
-                    {
-                        id: 2,
-                        priority: 2,
-                        action: {
-                            //@ts-ignore
-                            type: "redirect",
-                            redirect: { extensionPath: "/empty.js" },
-                        },
-                        condition: {
-                            urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js?|",
-                        },
-                    },
-                ],
-            },
-            () => {
-                /* tsserver thinks this callback is required */
-            }
-        );
-    } else {
-        chrome.declarativeNetRequest.updateDynamicRules(
-            {
-                removeRuleIds: [1, 2],
-            },
-            () => {
-                /* tsserver thinks this callback is required */
-            }
-        );
+                    ],
+                },
+                () => {
+                    /* tsserver thinks this callback is required */
+                }
+            );
+        } else {
+            chrome.declarativeNetRequest.updateDynamicRules(
+                {
+                    removeRuleIds: [1, 2],
+                },
+                () => {
+                    /* tsserver thinks this callback is required */
+                }
+            );
+        }
     }
 });
