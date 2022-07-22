@@ -249,3 +249,7 @@ textarea {
 #collapsible button {
     padding: 0px;
 }
+
+#error-bar {
+    color: #cc0000;
+}
