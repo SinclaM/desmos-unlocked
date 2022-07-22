@@ -1,16 +1,8 @@
 /// <reference types="chrome"/>
+import { defaultConfig } from "../../globals/config";
 
 chrome.runtime.onInstalled.addListener(function () {
-    chrome.storage.local.set({
-        // keepmeKEEPME should always remain in autoCommands, since MathQuill requires a nonempty
-        // space-delimited list of commands.
-        autoCommands:
-            "keepmeKEEPME alpha beta sqrt theta Theta phi Phi pi Pi tau nthroot cbrt sum prod int ans percent infinity infty gamma Gamma delta Delta epsilon epsiv zeta eta kappa lambda Lambda mu xi Xi rho sigma Sigma chi Psi omega Omega digamma iota nu upsilon Upsilon Psi square mid parallel nparallel perp times div approx",
-        charsThatBreakOutOfSupSub: "+-=<>*",
-        isAutoParenEnabled: false,
-        disableAutoSubstitutionInSubscripts: true,
-        enableMathquillOverrides: false,
-    });
+    chrome.storage.local.get(defaultConfig).then((config) => chrome.storage.local.set(config));
 });
 
 // Listen for redirects from the a request to calculator_desktop. When this redirect happens,
@@ -24,9 +16,10 @@ chrome.webRequest.onBeforeRedirect.addListener(
             // we keep trying to send the message until the "no receiving end" exception
             // is gone.
             try {
-                // TODO: Figure out why tsserver thinks that sendMessage returns void and not
-                // a promise. tsserver says await has no effect on the expression below but it's
-                // actual critical to resolve the promise and catch the error.
+                // tsserver says await has no effect on the expression below but it's
+                // actually critical to resolve the returned promise and catch the error. 
+                // It looks like the type definition from @types/chrome is not up to date 
+                // with the manifest v3 promise behavior for this funciton.
                 await chrome.tabs.sendMessage(tabId, { message: "redirect-detected" });
                 break;
             } catch {
@@ -52,8 +45,7 @@ chrome.storage.onChanged.addListener((changes) => {
                             id: 1,
                             priority: 1,
                             action: {
-                                //@ts-ignore
-                                type: "redirect",
+                                type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
                                 redirect: { extensionPath: "/empty.js" },
                             },
                             condition: {
@@ -64,8 +56,7 @@ chrome.storage.onChanged.addListener((changes) => {
                             id: 2,
                             priority: 2,
                             action: {
-                                //@ts-ignore
-                                type: "redirect",
+                                type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
                                 redirect: { extensionPath: "/empty.js" },
                             },
                             condition: {
@@ -73,18 +64,12 @@ chrome.storage.onChanged.addListener((changes) => {
                             },
                         },
                     ],
-                },
-                () => {
-                    /* tsserver thinks this callback is required */
                 }
             );
         } else {
             chrome.declarativeNetRequest.updateDynamicRules(
                 {
                     removeRuleIds: [1, 2],
-                },
-                () => {
-                    /* tsserver thinks this callback is required */
                 }
             );
         }

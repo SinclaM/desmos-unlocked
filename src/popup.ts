@@ -1,6 +1,7 @@
 import { desmosDefualtAutoCommands, basicAutoCommands, advancedAutoCommands } from "./utils/autoCommands";
 import { massSet, storeConfig, populateGrid, toggleConfig } from "./utils/utils";
 import extendedShortcuts from "./utils/extendedShortcuts";
+import { defaultConfig } from "./globals/config";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const setToDefaultCommon = () => {
@@ -22,9 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         massSet(
             Array.from(document.querySelectorAll("#desmos-default .latex-item, #basic .latex-item"))
                 .map((item) => item.id)
-                .filter(function (item) {
-                    return !new Set(["ge", "le", "ne", "pm", "mp", "psi", "to"]).has(item);
-                }),
+                .filter((item) => defaultConfig.autoCommands.split(" ").includes(item)),
             "autoCommands"
         );
         setToDefaultCommon();
