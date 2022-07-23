@@ -17,8 +17,8 @@ chrome.webRequest.onBeforeRedirect.addListener(
             // is gone.
             try {
                 // tsserver says await has no effect on the expression below but it's
-                // actually critical to resolve the returned promise and catch the error. 
-                // It looks like the type definition from @types/chrome is not up to date 
+                // actually critical to resolve the returned promise and catch the error.
+                // It looks like the type definition from @types/chrome is not up to date
                 // with the manifest v3 promise behavior for this funciton.
                 await chrome.tabs.sendMessage(tabId, { message: "redirect-detected" });
                 break;
@@ -38,40 +38,36 @@ chrome.webRequest.onBeforeRedirect.addListener(
 chrome.storage.onChanged.addListener((changes) => {
     if (typeof changes.enableMathquillOverrides !== "undefined") {
         if (changes.enableMathquillOverrides.newValue) {
-            chrome.declarativeNetRequest.updateDynamicRules(
-                {
-                    addRules: [
-                        {
-                            id: 1,
-                            priority: 1,
-                            action: {
-                                type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
-                                redirect: { extensionPath: "/empty.js" },
-                            },
-                            condition: {
-                                urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js|",
-                            },
+            chrome.declarativeNetRequest.updateDynamicRules({
+                addRules: [
+                    {
+                        id: 1,
+                        priority: 1,
+                        action: {
+                            type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
+                            redirect: { extensionPath: "/empty.js" },
                         },
-                        {
-                            id: 2,
-                            priority: 2,
-                            action: {
-                                type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
-                                redirect: { extensionPath: "/empty.js" },
-                            },
-                            condition: {
-                                urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js?|",
-                            },
+                        condition: {
+                            urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js|",
                         },
-                    ],
-                }
-            );
+                    },
+                    {
+                        id: 2,
+                        priority: 2,
+                        action: {
+                            type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
+                            redirect: { extensionPath: "/empty.js" },
+                        },
+                        condition: {
+                            urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js?|",
+                        },
+                    },
+                ],
+            });
         } else {
-            chrome.declarativeNetRequest.updateDynamicRules(
-                {
-                    removeRuleIds: [1, 2],
-                }
-            );
+            chrome.declarativeNetRequest.updateDynamicRules({
+                removeRuleIds: [1, 2],
+            });
         }
     }
 });

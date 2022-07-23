@@ -32,5 +32,8 @@ function getAutoOperators() {
     // | and more verbose breakdown of the function. For example, in this string might be
     // ln|natural-log. The regex filters out the verbose parts and keeps just the function
     // names.
-    return window.require("main/mathquill-operators").getAutoOperators().replace(/\|[^ ]*/g, "");
+    return window
+        .require("main/mathquill-operators")
+        .getAutoOperators()
+        .replace(/\|[^ ]*/g, "");
 }
