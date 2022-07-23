@@ -55,6 +55,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     extendSymbols.addEventListener("click", () => {
         toggleConfig("enableMathquillOverrides");
         collapsible.style.display = collapsible.style.display === "none" ? "block" : "none";
+        if (collapsible.style.display === "none") {
+            disableAll.click();
+        }
     });
 
     browser.storage.local.get("enableMathquillOverrides").then((stored) => {

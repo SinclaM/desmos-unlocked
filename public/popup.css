@@ -234,6 +234,11 @@ textarea {
     align-items: center;
 }
 
+#extend-mq h2 {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
 #collapsible textarea {
     grid-row: 1 / span 3;
 }
