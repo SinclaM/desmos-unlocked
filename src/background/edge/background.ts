@@ -1,33 +1,26 @@
 /// <reference types="chrome"/>
+import { defaultConfig } from "../../globals/config";
 
 chrome.runtime.onInstalled.addListener(function () {
-    chrome.storage.local.set({
-        // keepmeKEEPME should always remain in autoCommands, since MathQuill requires a nonempty
-        // space-delimited list of commands.
-        autoCommands:
-            "keepmeKEEPME alpha beta sqrt theta Theta phi Phi pi Pi tau nthroot cbrt sum prod int ans percent infinity infty gamma Gamma delta Delta epsilon epsiv zeta eta kappa lambda Lambda mu xi Xi rho sigma Sigma chi Psi omega Omega digamma iota nu upsilon Upsilon Psi square mid parallel nparallel perp times div approx",
-        charsThatBreakOutOfSupSub: "+-=<>*",
-        isAutoParenEnabled: false,
-        disableAutoSubstitutionInSubscripts: true,
-    });
+    chrome.storage.local.get(defaultConfig).then((config) => chrome.storage.local.set(config));
 });
 
 // Listen for redirects from the a request to calculator_desktop. When this redirect happens,
 // we want to send a message to the preload content script to begin module overrides and
 // initialize the calculator.
 chrome.webRequest.onBeforeRedirect.addListener(
-    async function ({ url }) {
-        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    async function ({ tabId }) {
         while (true) {
             // The request to calculator_desktop (and the following redirect) may happen
             // before preload_content is loaded at document_start. To avoid a race condition,
             // we keep trying to send the message until the "no receiving end" exception
             // is gone.
             try {
-                // TODO: Figure out why tsserver thinks that sendMessage returns void and not
-                // a promise. tsserver says await has no effect on the expression below but it's
-                // actual critical to resolve the promise and catch the error.
-                await chrome.tabs.sendMessage(tabs[0].id, { message: "redirect-detected", url: url });
+                // tsserver says await has no effect on the expression below but it's
+                // actually critical to resolve the returned promise and catch the error.
+                // It looks like the type definition from @types/chrome is not up to date
+                // with the manifest v3 promise behavior for this funciton.
+                await chrome.tabs.sendMessage(tabId, { message: "redirect-detected" });
                 break;
             } catch {
                 await new Promise((r) => setTimeout(r, 10));
@@ -41,3 +34,40 @@ chrome.webRequest.onBeforeRedirect.addListener(
         ],
     }
 );
+
+chrome.storage.onChanged.addListener((changes) => {
+    if (typeof changes.enableMathquillOverrides !== "undefined") {
+        if (changes.enableMathquillOverrides.newValue) {
+            chrome.declarativeNetRequest.updateDynamicRules({
+                addRules: [
+                    {
+                        id: 1,
+                        priority: 1,
+                        action: {
+                            type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
+                            redirect: { extensionPath: "/empty.js" },
+                        },
+                        condition: {
+                            urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js|",
+                        },
+                    },
+                    {
+                        id: 2,
+                        priority: 2,
+                        action: {
+                            type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
+                            redirect: { extensionPath: "/empty.js" },
+                        },
+                        condition: {
+                            urlFilter: "https://www.desmos.com/assets/build/calculator_desktop-*.js?|",
+                        },
+                    },
+                ],
+            });
+        } else {
+            chrome.declarativeNetRequest.updateDynamicRules({
+                removeRuleIds: [1, 2],
+            });
+        }
+    }
+});

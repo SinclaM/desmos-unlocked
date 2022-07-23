@@ -1,8 +1,8 @@
 {
     "name": "Desmos Unlocked",
-    "version": "1.0.7",
+    "version": "1.1.0",
     "description": "Browser extension for better user control of the Desmos graphing calculator configuration",
-    "permissions": ["storage", "declarativeNetRequest", "declarativeNetRequestWithHostAccess", "webRequest"],
+    "permissions": ["storage", "declarativeNetRequestWithHostAccess", "webRequest"],
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
@@ -34,15 +34,6 @@
             "48": "images/logo/48.png",
             "128": "images/logo/128.png"
         }
-    },
-    "declarative_net_request": {
-        "rule_resources": [
-            {
-                "id": "ruleset_1",
-                "enabled": true,
-                "path": "net_request_rules.json"
-            }
-        ]
     },
     "icons": {
         "16": "images/logo/16.png",

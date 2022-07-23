@@ -54,11 +54,6 @@ if (browser === "firefox") {
             new CopyPlugin({
                 patterns: [
                     {
-                        from: "net_request_rules.json",
-                        to: `../${BUILD_DIR_NAME}/net_request_rules.json`,
-                        context: "public",
-                    },
-                    {
                         from: "../node_modules/webextension-polyfill/dist/browser-polyfill.js",
                         to: `../${BUILD_DIR_NAME}/browser-polyfill.js`,
                         context: "public",

@@ -25,15 +25,36 @@ header {
     padding-right: 25px;
 }
 
-a {
+header a {
     display: flex;
     width: 17%;
     align-items: center;
     justify-content: space-between;
 }
 
-a img {
+header a img {
     padding-right: 5px;
+}
+
+#config-container a {
+    text-decoration: none;
+}
+
+#config-container a,
+#config-container a:visited,
+#config-container a:hover,
+#config-containera:active {
+    color: inherit;
+}
+
+#config-container a[href^="http"]::after,
+#config-container a[href^="https://"]::after
+{
+    content: url(./images/extern-link.svg);
+    width: 11px;
+    height: 11px;
+    margin-left: 7px;
+    display: inline-block;
 }
 
 #github-image {
@@ -213,11 +234,14 @@ h2 {
     align-items: center;
 }
 
+textarea {
+    resize: none;
+    font-size: 1.4em;
+}
+
 #breakout textarea {
     flex-grow: 0.5;
     height: 1.5em;
-    resize: none;
-    font-size: 1.4em;
 }
 
 #set-chars {
@@ -229,4 +253,31 @@ h2 {
     display: grid;
     grid-template-columns: 260px 100px;
     align-items: center;
+}
+
+#extend-mq h2 {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#collapsible textarea {
+    grid-row: 1 / span 3;
+}
+
+#collapsible .container {
+    display: grid;
+    grid-template-columns: 70% 25%;
+    grid-template-rows: 3em 3em 3em;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+#collapsible button {
+    height: 20px;
+    padding: 0px;
+    align-self: center;
+}
+
+#error-bar {
+    color: #cc0000;
 }
