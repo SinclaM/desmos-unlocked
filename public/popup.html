@@ -39,94 +39,128 @@
                 GitHub
             </a>
         </header>
-        <button id="set-to-default" role="button">set to default</button>
-        <button id="set-to-desmos-default">set to desmos default</button>
-        <hr class="thick-line" />
-        <h1>Symbol shortcuts</h1>
-        <hr class="thick-line" />
-        <h2>Desmos defaults</h2>
-        <div id="desmos-default" class="grid"></div>
-        <hr class="thin-line" />
-        <h2>Basic symbols</h2>
-        <div id="basic" class="grid"></div>
-        <hr class="thin-line" />
-        <h2>Advanced shortcuts</h2>
-        <p>⚠️ These shortcuts may have unexpected behavior</p>
-        <div id="advanced" class="grid"></div>
-        <hr class="thin-line" />
-        <div class="header-toggle" id="extend-mq">
-            <h2>Enable extended symbols</h2>
-            <div class="onoffswitch">
-                <input
-                    type="checkbox"
-                    name="onoffswitch"
-                    class="onoffswitch-checkbox"
-                    id="switch-extend-mq"
-                    tabindex="0"
-                />
-                <label class="onoffswitch-label" for="switch-extend-mq">
-                    <span class="onoffswitch-inner"></span>
-                    <span class="onoffswitch-switch"></span>
-                </label>
+        <div id="config-container">
+            <button id="set-to-default" role="button">set to default</button>
+            <button id="set-to-desmos-default">set to desmos default</button>
+            <hr class="thick-line" />
+            <h1>
+                <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#symbols-shortcuts"
+                    >Symbol shortcuts</a
+                >
+            </h1>
+            <hr class="thick-line" />
+            <h2>
+                <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#desmos-defaults"
+                    >Desmos defaults</a
+                >
+            </h2>
+            <div id="desmos-default" class="grid"></div>
+            <hr class="thin-line" />
+            <h2>
+                <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#basic-symbols">Basic symbols</a>
+            </h2>
+            <div id="basic" class="grid"></div>
+            <hr class="thin-line" />
+            <h2>
+                <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#advanced-shortcuts"
+                    >Advanced shortcuts</a
+                >
+            </h2>
+            <p>⚠️ These shortcuts may have unexpected behavior</p>
+            <div id="advanced" class="grid"></div>
+            <hr class="thin-line" />
+            <div class="header-toggle" id="extend-mq">
+                <h2>
+                    <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#extended-shortcuts"
+                        >Enable extended shortcuts</a
+                    >
+                </h2>
+                <div class="onoffswitch">
+                    <input
+                        type="checkbox"
+                        name="onoffswitch"
+                        class="onoffswitch-checkbox"
+                        id="switch-extend-mq"
+                        tabindex="0"
+                    />
+                    <label class="onoffswitch-label" for="switch-extend-mq">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
             </div>
-        </div>
-        <p>
-            Gain access to 300+ extra shortcuts.<br />⚠️ This feature is less stable than the others. <br />
-            &#8195;&#8195;&#8195;&#8195;&#8195;Disable it if the extension stops working.
-        </p>
-        <div id="collapsible">
-            <div class="container">
-                <textarea spellcheck="false" cols="20" rows="5"></textarea>
-                <button class="set">set</button>
-                <button class="enable">enable all</button>
-                <button class="disable">disable all</button>
+            <p>
+                Gain access to 300+ extra shortcuts.<br />⚠️ This feature is less stable than the others. <br />
+                &#8195;&#8195;&#8195;&#8195;&#8195;Disable it if the extension stops working.
+            </p>
+            <div id="collapsible">
+                <div class="container">
+                    <textarea spellcheck="false" cols="20" rows="5"></textarea>
+                    <button class="set">set</button>
+                    <button class="enable">enable all</button>
+                    <button class="disable">disable all</button>
+                </div>
+                <p id="error-bar"></p>
             </div>
-            <p id="error-bar"></p>
-        </div>
-        <hr class="thick-line" />
-        <h1>Other options</h1>
-        <hr class="thick-line" />
-        <h2>Breakout characters</h2>
-        <p>These characters will break out of superscripts.<br />⚠️ Spaces count as characters.</p>
-        <div id="breakout">
-            <textarea cols="20" rows="1"></textarea>
-            <button id="set-chars">set</button>
-        </div>
-        <hr class="thin-line" />
-        <div class="header-toggle" id="auto-paren">
-            <h2>Auto-parenthesize functions</h2>
-            <div class="onoffswitch">
-                <input
-                    type="checkbox"
-                    name="onoffswitch"
-                    class="onoffswitch-checkbox"
-                    id="switch-auto-paren"
-                    tabindex="0"
-                />
-                <label class="onoffswitch-label" for="switch-auto-paren">
-                    <span class="onoffswitch-inner"></span>
-                    <span class="onoffswitch-switch"></span>
-                </label>
+            <hr class="thick-line" />
+            <h1>
+                <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#other-options">Other options</a>
+            </h1>
+            <hr class="thick-line" />
+            <h2>
+                <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#breakout-characters"
+                    >Breakout characters</a
+                >
+            </h2>
+            <p>These characters will break out of superscripts.<br />⚠️ Spaces count as characters.</p>
+            <div id="breakout">
+                <textarea cols="20" rows="1"></textarea>
+                <button id="set-chars">set</button>
             </div>
-        </div>
-        <hr class="thin-line" />
-        <div class="header-toggle" id="shortcuts-in-subscripts">
-            <h2>Enable shortcuts in subscripts</h2>
-            <div class="onoffswitch">
-                <input
-                    type="checkbox"
-                    name="onoffswitch"
-                    class="onoffswitch-checkbox"
-                    id="switch-shortcuts-in-subscripts"
-                    tabindex="0"
-                />
-                <label class="onoffswitch-label" for="switch-shortcuts-in-subscripts">
-                    <span class="onoffswitch-inner"></span>
-                    <span class="onoffswitch-switch"></span>
-                </label>
+            <hr class="thin-line" />
+            <div class="header-toggle" id="auto-paren">
+                <h2>
+                    <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#auto-parenthesize-functions"
+                        >Auto-parenthesize functions</a
+                    >
+                </h2>
+                <div class="onoffswitch">
+                    <input
+                        type="checkbox"
+                        name="onoffswitch"
+                        class="onoffswitch-checkbox"
+                        id="switch-auto-paren"
+                        tabindex="0"
+                    />
+                    <label class="onoffswitch-label" for="switch-auto-paren">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
             </div>
+            <hr class="thin-line" />
+            <div class="header-toggle" id="shortcuts-in-subscripts">
+                <h2>
+                    <a href="https://github.com/SinclaM/desmos-unlocked/wiki/User-manual#enable-shortcuts-in-subscripts"
+                        >Enable shortcuts in subscripts</a
+                    >
+                </h2>
+                <div class="onoffswitch">
+                    <input
+                        type="checkbox"
+                        name="onoffswitch"
+                        class="onoffswitch-checkbox"
+                        id="switch-shortcuts-in-subscripts"
+                        tabindex="0"
+                    />
+                    <label class="onoffswitch-label" for="switch-shortcuts-in-subscripts">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+            <hr class="thick-line" />
         </div>
-        <hr class="thick-line" />
         <script type="application/javascript" src="browser-polyfill.js"></script>
         <script src="popup.js"></script>
     </body>

@@ -25,15 +25,36 @@ header {
     padding-right: 25px;
 }
 
-a {
+header a {
     display: flex;
     width: 17%;
     align-items: center;
     justify-content: space-between;
 }
 
-a img {
+header a img {
     padding-right: 5px;
+}
+
+#config-container a {
+    text-decoration: none;
+}
+
+#config-container a,
+#config-container a:visited,
+#config-container a:hover,
+#config-containera:active {
+    color: inherit;
+}
+
+#config-container a[href^="http"]::after,
+#config-container a[href^="https://"]::after
+{
+    content: url(./images/extern-link.svg);
+    width: 11px;
+    height: 11px;
+    margin-left: 7px;
+    display: inline-block;
 }
 
 #github-image {
