@@ -1,3 +1,5 @@
+import { BROWSER } from "../globals/env";
+
 if (BROWSER === "firefox") {
     browser.runtime.onMessage.addListener(async function (request) {
         let isDesmodderActive: boolean;

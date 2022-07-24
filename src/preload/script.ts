@@ -3,6 +3,7 @@ import extendMathQuill from "./extend_mathquill";
 import { pollForValue } from "../utils/utils";
 import injectScript from "../utils/injectScript";
 import { postMessageUp, listenToMessageDown } from "../utils/messages";
+import { BROWSER } from "../globals/env";
 
 let oldDefine!: any;
 function newDefine(moduleName: string, dependencies: any, definition: any) {

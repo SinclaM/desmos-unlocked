@@ -1,1 +1,1 @@
-declare const BROWSER: "firefox" | "chrome";
+export declare const BROWSER: "firefox" | "chrome" | "edge" | "opera";
