@@ -260,6 +260,18 @@ textarea {
     margin-bottom: 0px;
 }
 
+#two-line-warning {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#two-line-warning #warning-symbol {
+    font-size: 1.5em;
+    padding-right: 10px;
+}
+
 #collapsible textarea {
     grid-row: 1 / span 3;
 }
