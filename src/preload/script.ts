@@ -67,7 +67,7 @@ function runCalculator() {
     );
 }
 
-if (document.currentScript.getAttribute("run-calculator")) {
+if (BROWSER !== "firefox") {
     pollForValue(
         () => (document.querySelector("script[src^='/assets/build/calculator_desktop']") as HTMLScriptElement)?.src
     ).then((src) => {

@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const CopyPlugin = require("copy-webpack-plugin");
 const { merge } = require("webpack-merge");
 
@@ -40,6 +41,9 @@ baseConfig = {
                 { from: `${browser}_manifest.json`, to: `../${BUILD_DIR_NAME}/manifest.json`, context: "public" },
             ],
         }),
+        new webpack.DefinePlugin({
+            BROWSER: JSON.stringify(browser),
+        }),
     ],
 };
 
@@ -47,9 +51,6 @@ if (browser === "firefox") {
     module.exports = baseConfig;
 } else {
     module.exports = merge(baseConfig, {
-        entry: {
-            empty: path.join(__dirname, `../${SRC_DIR_NAME}/preload/empty.ts`),
-        },
         plugins: [
             new CopyPlugin({
                 patterns: [
