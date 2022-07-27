@@ -19,9 +19,11 @@ extension expands shortcut functionality to the rest of the Greek letters as wel
 more advanced mathematical symbols.
 
 Support for the following features planned:
-* A couple more Greek letters (`varrho`, `varpi`, `varepsilon`, `varphi`, `varkappa`, and `varsigma`), which currently conflict with the builtin `var` shortcut.
-* Auto parenthesizing functions like `sin`, `log`, etc.
-* Enabling shortucts in superscripts and subscripts.
+* Custom, user-defined shortcuts for supported symbols
+* Recognition of arbitrary Unicode characters in the calculator
+* Customization of recognized function names
+
+Check out the [wiki](https://github.com/SinclaM/desmos-unlocked/wiki) for more information.
 
 ## Download links
 * Firefox: https://addons.mozilla.org/en-US/firefox/addon/desmos-unlocked/
