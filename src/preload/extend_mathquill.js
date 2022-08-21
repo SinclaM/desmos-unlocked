@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { remap, emojis } from '../utils/commandMap';
 
 /**
  * MathQuill v0.10.1, by Han, Jeanine, and Mary
@@ -9064,6 +9065,7 @@ export default function () {
         return MathFieldNode;
     }(MathCommand));
     LatexCmds.editable = LatexCmds.MathQuillMathField = MathFieldNode; // backcompat with before cfd3620 on #233
+    remap(LatexCmds, emojis, bindVanillaSymbol);
     // Embed arbitrary things
     // Probably the closest DOM analogue would be an iframe?
     // From MathQuill's perspective, it's a MQSymbol, it can be
