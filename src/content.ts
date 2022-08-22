@@ -1,10 +1,5 @@
 import { MathQuillConfig } from "./globals/config";
-
-// Firefox only allows primitive types to be sent from the content script to the page context.
-// Firefox provides the builtin cloneInto function to allow sending objects between these
-// contexts.
-// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Sharing_objects_with_page_scripts#cloneinto
-declare const cloneInto: ((toClone: MathQuillConfig, context: any) => MathQuillConfig) | undefined;
+import "./globals/extension";
 
 async function updateConfig(changes?: browser.storage.ChangeDict) {
     let config: MathQuillConfig;
@@ -24,7 +19,7 @@ async function updateConfig(changes?: browser.storage.ChangeDict) {
     script.src = browser.runtime.getURL("script.js");
     script.onload = function () {
         try {
-            config = cloneInto!(config, window);
+            config = cloneInto(config, window);
         } catch (e) {
             /* Just need to catch the ReferenceError if on a nonsupporting browser */
         }

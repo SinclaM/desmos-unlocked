@@ -2,7 +2,10 @@
 import { defaultConfig } from "../../globals/config";
 
 browser.runtime.onInstalled.addListener(function () {
-    browser.storage.local.get(defaultConfig).then((config) => browser.storage.local.set(config));
+    browser.storage.local
+        // Casting interfaces to StorageObject is a pain because of the index signature.
+        .get((defaultConfig as unknown) as browser.storage.StorageObject)
+        .then((config) => browser.storage.local.set(config));
 });
 
 browser.webRequest.onBeforeRequest.addListener(

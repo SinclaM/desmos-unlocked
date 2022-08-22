@@ -1,4 +1,4 @@
-interface CommandMap {
+export interface CommandMap {
     [index: string]: Replacement;
 }
 
