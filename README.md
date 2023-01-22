@@ -11,6 +11,8 @@
 
 </div>
 
+**IMPORTANT: As of December 2022, Desmos appears to have ended support for defining custom symbols through the MathQuill API that this extension relies on. As a result, the core functionality of this extension no longer works. Please see issue [#14](/../../issues/14).**
+
 Write beautiful equations in the Desmos graphing calculator by customizing the underlying math formula editor
 from an easy-to-use control panel.
 
